@@ -13,4 +13,6 @@ export class console {
 
   @Column()
   dono: string;
+    
+
 }

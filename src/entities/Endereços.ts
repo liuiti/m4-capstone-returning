@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
+import { usuario } from "./Usuarios";
 
 @Entity("enderecos")
 export class endereco {
@@ -26,4 +27,23 @@ export class endereco {
   @Column()
   complemento: string;
 
+  @Column()
+  usuario_id: string;
+
+  @OneToOne(() => usuario, (usuario) => usuario.id)
+  @JoinColumn()
+  usuario: usuario;
 }
+
+/* 
+
+ @OneToOne(() => usuario, (usuario) => usuario.id)
+  @JoinColumn()
+  usuario: usuario;
+  
+  
+   @OneToOne(() => usuario, (usuario) => usuario.id, {
+    eager: true,
+  })
+  usuario: usuario;
+*/

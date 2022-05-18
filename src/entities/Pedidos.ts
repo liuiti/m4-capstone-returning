@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryColumn, ManyToMany, JoinColumn } from "typeorm";
-import { jogo } from "./Jogos";
+import { Jogo } from "./Jogos";
 import { console } from "./Consoles";
 
 @Entity("pedidos")
@@ -9,10 +9,10 @@ export class pedido {
 
   @Column()
   jogos_id: string;
-  @ManyToMany(() => jogo, (jogo) => jogo.id, {
+  @ManyToMany(() => Jogo, (jogo) => Jogo.id, {
     eager: true,
   })
-  jogo: jogo;
+  Jogo: Jogo;
 
   @Column()
   videogame_id: string;

@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("jogos")
-export class jogo {
+export default class Jogo {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
@@ -9,11 +9,14 @@ export class jogo {
   nome: string;
 
   @Column()
-  descrição: string;
+  descricao: string;
 
   @Column()
   valor: number;
 
   @Column()
   dono: string;
+
+  @Column()
+  observacao: string;
 }

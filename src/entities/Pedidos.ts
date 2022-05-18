@@ -9,7 +9,7 @@ export class pedido {
 
   @Column()
   jogos_id: string;
-  @ManyToMany(() => Jogo, (jogo) => Jogo.id, {
+  @ManyToMany(() => Jogo, (jogo) => jogo.id, {
     eager: true,
   })
   Jogo: Jogo;

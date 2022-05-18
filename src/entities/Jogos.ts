@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("jogos")
-export default class Jogo {
+export class Jogo {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 

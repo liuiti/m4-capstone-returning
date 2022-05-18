@@ -1,4 +1,4 @@
-import Jogo from "../../entities/Jogos";
+import { Jogo } from "../../entities/Jogos";
 import AppError from "../../errors/AppError";
 import { AppDataSource } from "../../data-source";
 
@@ -11,7 +11,7 @@ interface JogosDataParams {
 }
 
 export default class CriarJogosService {
-  async execute({
+  static async execute({
     nome,
     valor,
     descricao,

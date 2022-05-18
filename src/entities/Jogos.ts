@@ -5,24 +5,24 @@ export default class Jogo {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 128 })
   nome: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 256 })
   descricao: string;
 
-  @Column()
+  @Column({ type: "decimal", precision: 8, scale: 2 })
   valor: number;
 
-  @Column()
+  @Column({ type: "varchar", length: 128 })
   dono: string;
 
-  @Column()
-  estado:string;
+  @Column({ type: "varchar", length: 128 })
+  estado: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 256 })
   observacao: string;
 
   @Column()
-  disponivel:boolean;
+  disponivel: boolean;
 }

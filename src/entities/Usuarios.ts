@@ -6,22 +6,21 @@ export class usuario {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 128 })
   nome: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 11 })
   cpf: string;
 
-  @Column()
+  @Column({ type: "varchar", length: 128 })
   email: string;
 
-  @Column()
+  @Column({ type: "integer" })
   telefone: number;
 
-  @Column()
+  @Column({ type: "varchar", length: 128 })
   senha: string;
 
-  @Column()
-  pendencia:boolean;
-  
+  @Column({ default: "false" })
+  pendencia: boolean;
 }

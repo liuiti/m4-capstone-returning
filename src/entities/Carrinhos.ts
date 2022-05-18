@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryColumn, OneToOne, ManyToMany } from "typeorm";
+import { Entity, Column, PrimaryColumn, OneToOne, OneToMany } from "typeorm";
 import { usuario } from "./Usuarios";
 import { pedido } from "./Pedidos";
 
@@ -16,7 +16,7 @@ export class carrinho {
 
   @Column()
   pedido_id: string;
-  @ManyToMany(() => pedido, (pedido) => pedido.id, {
+  @OneToMany(() => pedido, (pedido) => pedido.id, {
     eager: true,
   })
   pedido: pedido;

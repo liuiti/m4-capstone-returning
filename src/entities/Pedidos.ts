@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryColumn, ManyToMany, JoinColumn } from "typeorm";
-import { Jogo } from "./Jogos";
+import { Entity, Column, PrimaryColumn, ManyToMany, OneToOne } from "typeorm";
+import  Jogo from "./Jogos";
 import { console } from "./Consoles";
 
 @Entity("pedidos")
@@ -9,14 +9,14 @@ export class pedido {
 
   @Column()
   jogos_id: string;
-  @ManyToMany(() => Jogo, (jogo) => Jogo.id, {
+  @OneToOne(() => Jogo, (jogo) => jogo.id, {
     eager: true,
   })
   Jogo: Jogo;
 
   @Column()
-  videogame_id: string;
-  @ManyToMany(() => console, (console) => console.id, {
+  console_id: string;
+  @OneToOne(() => console, (console) => console.id, {
     eager: true,
   })
   console: console;

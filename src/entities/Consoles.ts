@@ -13,6 +13,14 @@ export class console {
 
   @Column()
   dono: string;
-    
+
+  @Column()
+  estado: string;
+
+  @Column()
+  observacao: string;
+
+  @Column()
+  disponivel: boolean;
 
 }

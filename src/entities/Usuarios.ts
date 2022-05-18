@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from "typeorm";
+import { boolean } from "yup";
 
 @Entity("usuarios")
 export class usuario {
@@ -19,4 +20,8 @@ export class usuario {
 
   @Column()
   senha: string;
+
+  @Column()
+  pendencia:boolean;
+  
 }

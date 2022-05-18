@@ -2,7 +2,7 @@
 
 ---------------------------------
 
-*****Rotas para usuários não logados:
+**Rotas para usuários não logados:
 
 Os usuários não logados poderão visualizar todos os games e consoles através das rotas get destes produtos. Por exemplo:
 
@@ -14,7 +14,7 @@ Lista todos od consoles disponiveis na locadora
 
 ---------------------------------
 
-*****Rota de login:
+**Rota de login:
 
 Os usuários logados poderão alugar jogos e consoles. Para fazer o login, acesse a seguinte rota:
 
@@ -30,7 +30,7 @@ Dados necessário para enviar:
 
 --------------------------------- 
 
-*****Rota de criação de usuário
+**Rota de criação de usuário
 
 Para a criação de um usuário, acesse a seguinte rota:
 
@@ -48,7 +48,7 @@ Dados necessário para enviar:
 
 ---------------------------------
 
-*****Rota de locação de produtos
+**Rota de locação de produtos
 
 Para alugar um produto, pode ser jogo ou console, acesse a seguinte rota:
 
@@ -60,7 +60,7 @@ Você só precisar estar logado com o seu token validado durante o login.
 
 ---------------------------------
 
-*****Rota de devolução de produtos
+**Rota de devolução de produtos
 
 Para devolver um produto, acesse a seguinte rota:
 

@@ -8,6 +8,8 @@ interface JogosDataParams {
   descricao: string;
   dono: string;
   observacao: string;
+  estado: string;
+  disponivel: boolean;
 }
 
 export default class CriarJogosService {
@@ -17,6 +19,8 @@ export default class CriarJogosService {
     descricao,
     dono,
     observacao,
+    estado,
+    disponivel,
   }: JogosDataParams): Promise<Jogo> {
     const jogoRepositorio = AppDataSource.getRepository(Jogo);
 
@@ -26,10 +30,13 @@ export default class CriarJogosService {
       descricao,
       dono,
       observacao,
+      estado,
+      disponivel,
     });
 
     await jogoRepositorio.save(jogo);
 
+    console.log(typeof valor);
     return jogo;
   }
 }

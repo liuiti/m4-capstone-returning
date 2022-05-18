@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryColumn, OneToOne, OneToMany } from "typeorm";
+import { Entity, Column, PrimaryColumn, OneToOne, OneToMany, JoinTable, JoinColumn } from "typeorm";
 import { usuario } from "./Usuarios";
 import { pedido } from "./Pedidos";
 
@@ -11,13 +11,14 @@ export class carrinho {
   usuario_id: string;
   @OneToOne(() => usuario, (usuario) => usuario.id, {
     eager: true,
-  })
-  usuario: usuario;
+  })@JoinColumn()
+  usuario: usuario[];
 
   @Column()
   pedido_id: string;
   @OneToMany(() => pedido, (pedido) => pedido.id, {
     eager: true,
-  })
-  pedido: pedido;
+  })@JoinColumn()
+
+  pedido: pedido[];
 }

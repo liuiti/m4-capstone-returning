@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn, JoinTable } from "typeorm";
 import { usuario } from "./Usuarios";
 
 @Entity("enderecos")
@@ -32,8 +32,8 @@ export class endereco {
 
   @OneToOne(() => usuario, (usuario) => usuario.id, {
     eager: true,
-  })
-  usuario: usuario;
+  })@JoinColumn()
+  usuario: usuario[];
 }
 
 /* 

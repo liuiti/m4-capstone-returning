@@ -1,8 +1,8 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateUserTable1652798799042 implements MigrationInterface {
+export class CriarTabelaUsuario1652816388960 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(' CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
+    await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
 
     await queryRunner.createTable(
       new Table({
@@ -21,19 +21,18 @@ export class CreateUserTable1652798799042 implements MigrationInterface {
             length: "128",
           },
           {
-            name: "cpf",
-            type: "varchar",
-            length: "128",
-          },
-          {
             name: "email",
             type: "varchar",
             length: "128",
           },
           {
-            name: "telefone",
-            type: "number",
+            name: "cpf",
+            type: "varchar",
             length: "128",
+          },
+          {
+            name: "telefone",
+            type: "integer",
           },
           {
             name: "senha",

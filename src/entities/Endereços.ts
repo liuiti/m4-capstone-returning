@@ -30,8 +30,9 @@ export class endereco {
   @Column()
   usuario_id: string;
 
-  @OneToOne(() => usuario, (usuario) => usuario.id)
-  @JoinColumn()
+  @OneToOne(() => usuario, (usuario) => usuario.id, {
+    eager: true,
+  })
   usuario: usuario;
 }
 

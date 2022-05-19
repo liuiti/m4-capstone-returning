@@ -7,27 +7,27 @@ import {
   JoinTable,
   JoinColumn,
 } from "typeorm";
-import { usuario } from "./Usuarios";
-import { pedido } from "./Pedidos";
+import { Usuario } from "./Usuarios";
+import { Pedido } from "./Pedidos";
 
 @Entity("carrinhos")
-export class carrinho {
+export class Carrinho {
   @PrimaryColumn("bigint")
   readonly id: string;
 
   @Column({ type: "varchar", length: 128 })
   usuario_id: string;
-  @OneToOne(() => usuario, (usuario) => usuario.id, {
+  @OneToOne(() => Usuario, (usuario) => usuario.id, {
     eager: true,
   })
   @JoinColumn()
-  usuario: usuario[];
+  usuario: Usuario[];
 
   @Column({ type: "varchar", length: 128 })
   pedido_id: string;
-  @OneToMany(() => pedido, (pedido) => pedido.id, {
+  @OneToMany(() => Pedido, (pedido) => pedido.id, {
     eager: true,
   })
   @JoinColumn()
-  pedido: pedido[];
+  pedido: Pedido[];
 }

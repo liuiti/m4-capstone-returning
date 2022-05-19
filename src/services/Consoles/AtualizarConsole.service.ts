@@ -1,6 +1,7 @@
 import { Console } from "../../entities/Consoles";
 import { AppDataSource } from "../../data-source";
 import { IConsoleAlterar } from "../../interfaces/Console";
+import AppError from "../../errors/AppError";
 const AtualizarConsoleService = async ({
   id,
   nome,
@@ -17,6 +18,9 @@ const AtualizarConsoleService = async ({
   const buscarConsole = console.find((item) => {
     item.id === id;
   });
+  if(!buscarConsole){
+    throw new AppError("Id do console inexistente!")
+  }
 
   await consoleRepositorio.update(buscarConsole!.id, {
     nome: nome || buscarConsole!.nome,

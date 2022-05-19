@@ -1,6 +1,4 @@
-import { Request, Response } from "express";
-import { AppDataSource } from "../../data-source";
-import { Usuario } from "../../entities/Usuarios";
+import { Request, response, Response } from "express";
 
 const criarUsuarioController = async (req: Request, res: Response) => {
   const { nome, cpf, email, telefone, senha, pendencias } = req.body;
@@ -13,4 +11,5 @@ const criarUsuarioController = async (req: Request, res: Response) => {
     senha,
     pendencias,
   });
+  return response.status(201).json(usuario);
 };

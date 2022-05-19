@@ -24,7 +24,6 @@ export default class JogosController {
 
     const jogos = await jogoRepositorio.find();
 
-    console.log(typeof jogos[0].valor);
     return response.json(jogos);
   }
 }

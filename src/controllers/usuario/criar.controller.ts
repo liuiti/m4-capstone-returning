@@ -1,7 +1,8 @@
-import { Request, response, Response } from "express";
+import { Request, Response } from "express";
+import CriarUsuarioService from "../../services/usuario/criarUsuario.service";
 
 const criarUsuarioController = async (req: Request, res: Response) => {
-  const { nome, cpf, email, telefone, senha, pendencias } = req.body;
+  const { nome, cpf, email, telefone, senha, pendencia } = req.body;
 
   const usuario = await CriarUsuarioService({
     nome,
@@ -9,7 +10,9 @@ const criarUsuarioController = async (req: Request, res: Response) => {
     email,
     telefone,
     senha,
-    pendencias,
+    pendencia,
   });
-  return response.status(201).json(usuario);
+  return res.status(201).json(usuario);
 };
+
+export default criarUsuarioController;

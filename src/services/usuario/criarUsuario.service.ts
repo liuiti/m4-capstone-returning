@@ -1,6 +1,7 @@
 import { Usuario } from "../../entities/Usuarios";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
+import { hash } from "bcrypt";
 
 interface UsuarioDataParams {
   nome: string;
@@ -26,18 +27,23 @@ const CriarUsuarioService = async ({
   });
 
   if (verificandoEmailExiste) {
-    throw new AppError("Email já exite");
+    throw new AppError("Email já exite", 401);
   }
+
+  const senhaCodificada = await hash(senha, 8);
 
   const usuario = usuarioRepositorio.create({
     nome,
     cpf,
     email,
     telefone,
-    senha,
+    senha: senhaCodificada,
     pendencia,
   });
+
   await usuarioRepositorio.save(usuario);
 
   return usuario;
 };
+
+export default CriarUsuarioService;

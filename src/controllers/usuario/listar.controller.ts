@@ -7,5 +7,6 @@ const listarUsuarioController = async (req: Request, res: Response) => {
 
   const usuarios = await usuariosRepositorio.find();
 
-  return response.status(200).json(usuarios);
+  return res.status(200).json(usuarios);
 };
+export default listarUsuarioController;

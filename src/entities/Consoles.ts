@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("consoles")
-export class console {
+export class Console {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 

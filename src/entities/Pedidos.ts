@@ -1,9 +1,9 @@
 import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
 import { Jogo } from "./Jogos";
-import { console } from "./Consoles";
+import { Console } from "./Consoles";
 
 @Entity("pedidos")
-export class pedido {
+export class Pedido {
   @PrimaryColumn("bigint")
   readonly id: string;
 
@@ -17,9 +17,9 @@ export class pedido {
 
   @Column({ type: "varchar", length: 128, unique: true })
   console_id: string;
-  @OneToOne(() => console, (console) => console.id, {
+  @OneToOne(() => Console, (console) => console.id, {
     eager: true,
   })
   @JoinColumn()
-  console: console[];
+  console: Console[];
 }

@@ -6,10 +6,10 @@ import {
   JoinColumn,
   JoinTable,
 } from "typeorm";
-import { usuario } from "./Usuarios";
+import { Usuario } from "./Usuarios";
 
 @Entity("enderecos")
-export class endereco {
+export class Endereco {
   @PrimaryColumn("bigint")
   readonly id: string;
 
@@ -37,11 +37,11 @@ export class endereco {
   @Column({ type: "varchar", length: 128, unique: true })
   usuario_id: string;
 
-  @OneToOne(() => usuario, (usuario) => usuario.id, {
+  @OneToOne(() => Usuario, (usuario) => usuario.id, {
     eager: true,
   })
   @JoinColumn()
-  usuario: usuario[];
+  usuario: Usuario[];
 }
 
 /* 

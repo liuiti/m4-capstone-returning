@@ -1,4 +1,4 @@
-import { Jogo } from "../../entities/Jogos";
+import { Jogo } from "../../models/Jogos";
 import AppError from "../../errors/AppError";
 import { AppDataSource } from "../../data-source";
 
@@ -36,7 +36,6 @@ export default class CriarJogosService {
 
     await jogoRepositorio.save(jogo);
 
-    console.log(typeof valor);
     return jogo;
   }
 }

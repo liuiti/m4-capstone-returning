@@ -7,7 +7,7 @@ interface EnderecosDataParams {
   estado: string;
   cep: string;
   rua: string;
-  numero: number;
+  numero: string;
   bairro: string;
   complemento?: string;
 }
@@ -24,7 +24,7 @@ export default class CriarEnderecosService {
   }: EnderecosDataParams): Promise<endereco> {
     const enderecoRepositorio = AppDataSource.getRepository(endereco);
 
-    const endereco = enderecoRepositorio.create({
+    const enderecoUsuario = enderecoRepositorio.create({
       cidade,
       estado,
       cep,
@@ -34,8 +34,8 @@ export default class CriarEnderecosService {
       complemento,
     });
 
-    await enderecoRepositorio.save(endereco);
+    await enderecoRepositorio.save(enderecoUsuario);
 
-    return endereco;
+    return enderecoUsuario;
   }
 }

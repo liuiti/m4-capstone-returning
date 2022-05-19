@@ -2,7 +2,8 @@ import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { endereco } from "../models/Endereços";
 import CriarEnderecosService from "../services/Endereços/CriarEnderecos.service";
-import BuscarJogoService from "../services/Jogos/BuscarJogo.service";
+import AtualizarEnderecosService from "../services/Endereços/AtualizarEnderecos.service";
+import DeletarEnderecosService from "../services/Endereços/DeletarEnderecos.service";
 
 export default class EnderecosController {
   static async store(request: Request, response: Response) {
@@ -25,6 +26,39 @@ export default class EnderecosController {
 
     const enderecos = await enderecoRepositorio.find();
 
-    return response.json(enderecos);
+    return response.status(200).json(enderecos);
+  }
+
+  static async update(request: Request, response: Response) {
+    const { id } = request.params;
+    const { cidade, estado, cep, rua, numero, bairro, complemento } =
+      request.body;
+
+    const atualizarService = new AtualizarEnderecosService();
+
+    const endereco = await atualizarService.execute({
+      id,
+      cidade,
+      estado,
+      cep,
+      rua,
+      numero,
+      bairro,
+      complemento,
+    });
+
+    return response.status(200).json(endereco);
+  }
+
+  static async delete(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const deleteService = new DeletarEnderecosService();
+
+    await deleteService.execute({
+      id,
+    });
+
+    return response.status(200).json();
   }
 }

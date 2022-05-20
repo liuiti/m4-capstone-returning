@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
-import { Endereco } from "../models/Endereços";
+import { Endereco } from "../models/Enderecos";
 import CriarEnderecosService from "../services/Endereços/CriarEnderecos.service";
 import AtualizarEnderecosService from "../services/Endereços/AtualizarEnderecos.service";
 import DeletarEnderecosService from "../services/Endereços/DeletarEnderecos.service";

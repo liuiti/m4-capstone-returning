@@ -25,9 +25,3 @@ export const AppDataSource =
         migrations: ["src/migrations/*.ts"],
         entities: ["src/entities/*.ts"],
       });
-
-// AppDataSource.initialize()
-//   .then(() => {
-//     console.log("Data Source initialized");
-//   })
-//   .catch((err) => console.error("Error during data source initialization"));

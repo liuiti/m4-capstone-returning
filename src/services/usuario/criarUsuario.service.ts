@@ -28,7 +28,12 @@ const CriarUsuarioService = async ({
   });
 
   if (verificandoEmailExiste) {
-    throw new AppError("Email já exite", 401);
+    throw new AppError("Email já existe", 401);
+  }
+
+  if (!nome || !cpf || !email || !telefone || !senha) {
+    throw new AppError("Dados incorretos", 401);
+
   }
 
   const senhaCodificada = await hash(senha, 8);

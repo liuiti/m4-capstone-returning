@@ -1,15 +1,15 @@
 import { Router } from "express";
-import atualizarUsuarioController from "../controllers/usuario/atualizar.controller";
-import deletarUsuarioController from "../controllers/usuario/deletar.controller";
-import criarUsuarioController from "../controllers/usuario/criar.controller";
-import listarUsuarioController from "../controllers/usuario/listar.controller";
+import UsuarioController from "../controllers/Usuario.controller";
 import usuarioInfoExiste from "../middlewares/usuarioInfoExiste.middlewares";
+
+
+
 
 const usuarioRouter = Router();
 
-usuarioRouter.post("", criarUsuarioController);
-usuarioRouter.get("", listarUsuarioController);
-usuarioRouter.patch("/:id", usuarioInfoExiste, atualizarUsuarioController);
-usuarioRouter.delete("/:id", deletarUsuarioController);
+usuarioRouter.post("/criar-usuario", UsuarioController.store); 
+usuarioRouter.get("/listar", UsuarioController.index); 
+usuarioRouter.patch("/atualizar/:id", usuarioInfoExiste, UsuarioController.update);  
+usuarioRouter.delete("/deletar/:id", UsuarioController.delete);
 
 export default usuarioRouter;

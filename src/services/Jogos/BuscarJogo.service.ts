@@ -8,7 +8,7 @@ const BuscarJogoService = async (id: string) => {
   const jogo = await jogoRepositorio.findOne({ where: { id } });
 
   if (!jogo) {
-    throw new AppError("Não encontramos nenhum jogo com esse id");
+    throw new AppError("Não encontramos nenhum jogo com esse id", 404);
   }
 
   return jogo;

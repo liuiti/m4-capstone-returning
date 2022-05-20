@@ -16,7 +16,7 @@ export default async function usuarioInfoExiste(
     const email = req.email;
     const alrearyEmail = await usuarioRepositorio.findOne({ where: { email } });
     if (alrearyEmail) {
-      throw new AppError(`Email já existe`);
+      throw new AppError(`Email já existe`, 406);
     }
   }
 
@@ -24,7 +24,7 @@ export default async function usuarioInfoExiste(
     const nome = req.nome;
     const alrearynome = await usuarioRepositorio.findOne({ where: { nome } });
     if (alrearynome) {
-      throw new AppError(`Nome já existe`);
+      throw new AppError(`Nome já existe`, 406);
     }
   }
 
@@ -32,7 +32,7 @@ export default async function usuarioInfoExiste(
     const cpf = req.cpf;
     const alrearycpf = await usuarioRepositorio.findOne({ where: { cpf } });
     if (alrearycpf) {
-      throw new AppError(`Cpf já existe`);
+      throw new AppError(`Cpf já existe`, 406);
     }
   }
   if (req.telefone) {
@@ -41,7 +41,7 @@ export default async function usuarioInfoExiste(
       where: { telefone },
     });
     if (alrearytelefone) {
-      throw new AppError(`Telefone já existe`);
+      throw new AppError(`Telefone já existe`, 406);
     }
   }
 

@@ -3,13 +3,9 @@ import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
 import { DeleteResult } from "typeorm";
 
-interface EnderecoDataParams {
-  id: string;
-}
-
 export default class DeletarEnderecosService {
-  async execute({ id }: EnderecoDataParams): Promise<DeleteResult> {
-    const enderecoRepositorio = AppDataSource.getRepository(endereco);
+  static async execute(id: string): Promise<DeleteResult> {
+    const enderecoRepositorio = AppDataSource.getRepository(Endereco);
 
     const enderecoUsuario = await enderecoRepositorio.findOne({
       where: {
@@ -18,7 +14,7 @@ export default class DeletarEnderecosService {
     });
 
     if (!enderecoUsuario) {
-      throw new AppError("Não encontrado nenhum endereço com esse id");
+      throw new AppError("Não encontrado nenhum endereço com esse id", 404);
     }
 
     return await enderecoRepositorio.delete(id);

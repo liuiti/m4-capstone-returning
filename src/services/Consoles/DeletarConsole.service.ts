@@ -1,22 +1,18 @@
 import { Console } from "../../models/Consoles";
-import IConsoleCriar from "../../interfaces/Console";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
+import { DeleteResult } from "typeorm";
 
-const DeleteConsoleService = async (id: string) => {
-  const consoleRepositorio = AppDataSource.getRepository(Console);
+export default class DeletarConsoleService {
+  static async execute(id: string): Promise<DeleteResult> {
+    const consoleRepositorio = AppDataSource.getRepository(Console);
 
-  const console = await consoleRepositorio.find();
+    const console = await consoleRepositorio.findOne({ where: { id } });
 
-  const buscarConsole = console.find((item) => item.id === id);
+    if (!console) {
+      throw new AppError("Não encontrado nenhum console com esse id", 404);
+    }
 
-  if (!buscarConsole) {
-    throw new AppError("Id do console inexistente!", 401);
+    return await consoleRepositorio.delete(id);
   }
-
-  await consoleRepositorio.delete(buscarConsole!.id);
-
-  return true;
-};
-
-export default DeleteConsoleService;
+}

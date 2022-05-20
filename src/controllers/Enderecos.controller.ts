@@ -5,7 +5,7 @@ import CriarEnderecosService from "../services/Endereços/CriarEnderecos.service
 import AtualizarEnderecosService from "../services/Endereços/AtualizarEnderecos.service";
 import DeletarEnderecosService from "../services/Endereços/DeletarEnderecos.service";
 
-export default class EnderecosController {
+export default class EnderecoController {
   static async store(request: Request, response: Response) {
     const { cidade, estado, cep, rua, numero, bairro, complemento } =
       request.body;
@@ -34,9 +34,7 @@ export default class EnderecosController {
     const { cidade, estado, cep, rua, numero, bairro, complemento } =
       request.body;
 
-    const atualizarService = new AtualizarEnderecosService();
-
-    const endereco = await atualizarService.execute({
+    const endereco = await AtualizarEnderecosService.execute({
       id,
       cidade,
       estado,
@@ -47,18 +45,18 @@ export default class EnderecosController {
       complemento,
     });
 
-    return response.status(200).json(endereco);
+    return response
+      .status(200)
+      .json({ message: "Endereco atualizado", enderecoAtualizado: endereco });
   }
 
   static async delete(request: Request, response: Response) {
     const { id } = request.params;
 
-    const deleteService = new DeletarEnderecosService();
+    const endereco = await DeletarEnderecosService.execute(id);
 
-    await deleteService.execute({
-      id,
-    });
-
-    return response.status(200).json();
+    return response
+      .status(200)
+      .json({ message: "Endereco deletado", enderecoDeletado: endereco });
   }
 }

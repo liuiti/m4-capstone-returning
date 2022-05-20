@@ -1,37 +1,33 @@
 import { Console } from "../../models/Consoles";
 import { AppDataSource } from "../../data-source";
-import { IConsoleAlterar } from "../../interfaces/Console";
+import { IConsoleAtualizar } from "../../interfaces/Console";
 import AppError from "../../errors/AppError";
-const AtualizarConsoleService = async ({
-  id,
-  nome,
-  valor,
-  dono,
-  estado,
-  observacao,
-  disponivel,
-}: IConsoleAlterar) => {
-  const consoleRepositorio = AppDataSource.getRepository(Console);
 
-  const console = await consoleRepositorio.find();
+export default class AtualizarConsoleService {
+  static async execute({
+    id,
+    nome,
+    valor,
+    dono,
+    estado,
+    observacao,
+    disponivel,
+  }: IConsoleAtualizar): Promise<Console> {
+    const consoleRepositorio = AppDataSource.getRepository(Console);
 
-  const buscarConsole = console.find((item) => {
-    item.id === id;
-  });
-  if (!buscarConsole) {
-    throw new AppError("Id do console inexistente!");
+    const console = await consoleRepositorio.findOne({ where: { id } });
+
+    if (!console) {
+      throw new AppError("Não encontrado nenhum console com esse id", 404);
+    }
+
+    nome ? (console.nome = nome) : console.nome;
+    valor ? (console.valor = valor) : console.valor;
+    dono ? (console.dono = dono) : console.dono;
+    estado ? (console.estado = estado) : console.estado;
+    observacao ? (console.observacao = observacao) : console.observacao;
+    disponivel ? (console.disponivel = disponivel) : console.disponivel;
+
+    return consoleRepositorio.save(console);
   }
-
-  await consoleRepositorio.update(buscarConsole!.id, {
-    nome: nome || buscarConsole!.nome,
-    valor: valor || buscarConsole!.valor,
-    dono: dono || buscarConsole!.dono,
-    estado: estado || buscarConsole!.estado,
-    observacao: observacao || buscarConsole!.observacao,
-    disponivel: disponivel || buscarConsole!.disponivel,
-  });
-
-  return true;
-};
-
-export default AtualizarConsoleService;
+}

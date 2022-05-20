@@ -1,20 +1,10 @@
 import { Endereco } from "../../models/Enderecos";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
-
-interface EnderecoDataParams {
-  id: string;
-  cidade: string;
-  estado: string;
-  cep: string;
-  rua: string;
-  numero: string;
-  bairro: string;
-  complemento: string;
-}
+import { IEnderecoAtualizar } from "../../interfaces/Endereco";
 
 export default class AtualizarEnderecosService {
-  async execute({
+  static async execute({
     id,
     cidade,
     estado,
@@ -23,7 +13,7 @@ export default class AtualizarEnderecosService {
     numero,
     bairro,
     complemento,
-  }: EnderecoDataParams): Promise<Endereco> {
+  }: IEnderecoAtualizar): Promise<Endereco> {
     const enderecoRepositorio = AppDataSource.getRepository(Endereco);
 
     const enderecoUsuario = await enderecoRepositorio.findOne({
@@ -31,7 +21,7 @@ export default class AtualizarEnderecosService {
     });
 
     if (!enderecoUsuario) {
-      throw new AppError("Não encontrado nenhum endereço com esse id");
+      throw new AppError("Não encontrado nenhum endereço com esse id", 404);
     }
 
     cidade ? (enderecoUsuario.cidade = cidade) : enderecoUsuario.cidade;

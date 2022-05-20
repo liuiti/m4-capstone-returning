@@ -7,7 +7,7 @@ import usuarioInfoExiste from "../middlewares/usuarioInfoExiste.middlewares";
 
 const usuarioRouter = Router();
 
-usuarioRouter.post("", criarUsuarioController);
+usuarioRouter.post("/criar-usuario", criarUsuarioController);
 usuarioRouter.get("", listarUsuarioController);
 usuarioRouter.patch("/:id", usuarioInfoExiste, atualizarUsuarioController);
 usuarioRouter.delete("/:id", deletarUsuarioController);

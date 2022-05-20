@@ -3,13 +3,14 @@ import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
 import { hash } from "bcrypt";
 
-interface UsuarioDataParams {
+
+interface NovoUsuario {
   nome: string;
   cpf: string;
   email: string;
   telefone: number;
   senha: string;
-  pendencia: boolean;
+ 
 }
 
 const CriarUsuarioService = async ({
@@ -18,8 +19,8 @@ const CriarUsuarioService = async ({
   email,
   telefone,
   senha,
-  pendencia,
-}: UsuarioDataParams): Promise<Usuario> => {
+  
+}: NovoUsuario): Promise<Usuario> => {
   const usuarioRepositorio = AppDataSource.getRepository(Usuario);
 
   const verificandoEmailExiste = await usuarioRepositorio.findOne({
@@ -38,7 +39,7 @@ const CriarUsuarioService = async ({
     email,
     telefone,
     senha: senhaCodificada,
-    pendencia,
+    pendencia: false,
   });
 
   await usuarioRepositorio.save(usuario);

@@ -12,8 +12,18 @@ interface JogosDataParams {
   disponivel: boolean;
 }
 
-export default class CriarJogosService {
-  static async execute({
+const CriarJogoService = async ({
+  nome,
+  valor,
+  descricao,
+  dono,
+  observacao,
+  estado,
+  disponivel,
+}: JogosDataParams): Promise<Jogo> => {
+  const jogoRepositorio = AppDataSource.getRepository(Jogo);
+  console.log(nome, "to no service");
+  const jogo = jogoRepositorio.create({
     nome,
     valor,
     descricao,
@@ -21,22 +31,12 @@ export default class CriarJogosService {
     observacao,
     estado,
     disponivel,
-  }: JogosDataParams): Promise<Jogo> {
-    const jogoRepositorio = AppDataSource.getRepository(Jogo);
+  });
 
-    const jogo = jogoRepositorio.create({
-      nome,
-      valor,
-      descricao,
-      dono,
-      observacao,
-      estado,
-      disponivel,
-    });
+  await jogoRepositorio.save(jogo);
 
-    await jogoRepositorio.save(jogo);
+  console.log(jogo);
+  return jogo;
+};
 
-    console.log(typeof valor);
-    return jogo;
-  }
-}
+export default CriarJogoService;

@@ -1,9 +1,9 @@
-import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
 import { Usuario } from "./Usuarios";
 
 @Entity("enderecos")
 export class Endereco {
-  @PrimaryColumn("bigint")
+  @PrimaryGeneratedColumn("increment")
   readonly id: string;
 
   @Column({ type: "varchar", length: 128 })

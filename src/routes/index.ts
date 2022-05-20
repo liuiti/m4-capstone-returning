@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import consoleRouter from "./console.routes";
 import enderecoRouter from "./enderecos.routes";
-
+import carrinhoRouter from "./carrinho.routes";
 import jogoRouter from "./jogos.routes";
 import pedidosRouter from "./pedidos.route";
 import usuarioRouter from "./usuario.routes";
@@ -16,5 +16,7 @@ routes.use("/usuarios", usuarioRouter);
 routes.use("/pedidos", pedidosRouter)
 
 routes.use("/enderecos", enderecoRouter);
+
+routes.use("/carrinho",carrinhoRouter)
 
 export default routes;

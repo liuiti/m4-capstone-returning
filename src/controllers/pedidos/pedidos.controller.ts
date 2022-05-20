@@ -4,15 +4,15 @@ import PedidosServices from "../../services/pedidos/pedidos.service";
 
 export default class PedidosController {
   static async store(req: Request, res: Response) {
-    const { carrinhoId } = req.body;
+    const { carrinho_id } = req.body;
 
-    const criandoPedido = PedidosServices.criarPedido(carrinhoId);
+    const criandoPedido = PedidosServices.criarPedido(carrinho_id);
 
     return res.status(201).json(criandoPedido);
   }
 
   static async index(req: Request, res: Response) {
-    const listarPedidos = PedidosServices.listarPedidos();
+    const listarPedidos = PedidosServices.listarPedidos;
 
     return res.status(200).json(listarPedidos);
   }

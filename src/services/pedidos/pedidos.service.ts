@@ -7,7 +7,7 @@ export default class PedidosServices {
     const pedidoRepositorio = AppDataSource.getRepository(Pedido);
 
     const novoPedido = new Pedido();
-    novoPedido.carrinho_id = carrinhoId;
+    
 
     pedidoRepositorio.create(novoPedido);
 
@@ -21,7 +21,7 @@ export default class PedidosServices {
     const listarPedido = await pedidoRepositorio.find();
 
     if (!listarPedido) {
-      throw new AppError("Consoles inexistente!", 401);
+      throw new AppError("Pedido inexistente!", 401);
     }
     return listarPedido;
   }
@@ -31,7 +31,7 @@ export default class PedidosServices {
     const listarPedido = await pedidoRepositorio.findOne({where:{id}});
 
     if (!listarPedido) {
-      throw new AppError("Consoles inexistente!", 401);
+      throw new AppError("Pedido inexistente!", 401);
     }
 
     return listarPedido;
@@ -71,7 +71,7 @@ export default class PedidosServices {
       const buscarPedido = pedidoExistente.find((item) => item.id === id);
 
       if (!pedidoExistente) {
-        throw new AppError("Consoles inexistente!", 401);
+        throw new AppError("Pedido inexistente!", 401);
       }
 
       await pedidoRepositorio.delete(buscarPedido!.carrinho_id)

@@ -13,7 +13,7 @@ const DeletarUsuarioService = async ({
   const usuarioRepositorio = AppDataSource.getRepository(Usuario);
 
   const usuario = await usuarioRepositorio.findOne({ where: { id } });
-
+   
   if (!usuario) {
     throw new AppError("Não foi encontrado nenhum usuario com esse id");
   }

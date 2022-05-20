@@ -12,6 +12,7 @@ export default class CriarEnderecosService {
     numero,
     bairro,
     complemento,
+    usuarioId,
   }: IEnderecosCriar): Promise<Endereco> {
     const enderecoRepositorio = AppDataSource.getRepository(Endereco);
 
@@ -23,6 +24,7 @@ export default class CriarEnderecosService {
       numero,
       bairro,
       complemento,
+      usuario: usuarioId,
     });
 
     await enderecoRepositorio.save(enderecoUsuario);

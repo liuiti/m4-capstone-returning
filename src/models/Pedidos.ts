@@ -1,9 +1,15 @@
-import { Entity, Column, PrimaryColumn, JoinColumn, ManyToOne } from "typeorm";
+import {
+  Entity,
+  Column,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Carrinho } from "./Carrinhos";
 
 @Entity("pedidos")
 export class Pedido {
-  @PrimaryColumn("bigint")
+  @PrimaryGeneratedColumn("increment")
   readonly id: string;
 
   @Column({ type: "varchar", length: 128, unique: true })

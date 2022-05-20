@@ -11,7 +11,7 @@ export default class JogosController {
       valor,
       descricao_jogo,
       dono,
-      observacao,
+
       estado,
       disponivel,
     } = request.body;
@@ -21,7 +21,7 @@ export default class JogosController {
       valor,
       descricao_jogo,
       dono,
-      observacao,
+
       estado,
       disponivel,
     });

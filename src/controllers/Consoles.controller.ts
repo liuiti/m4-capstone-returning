@@ -2,15 +2,17 @@ import { Console } from "console";
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import AtualizarConsoleService from "../services/Consoles/AtualizarConsole.service";
-import CriarConsoleService from "../services/Consoles/CriarConsole.service";
+import CriarConsolesService from "../services/Consoles/CriarConsole.service";
 import DeletarConsoleService from "../services/Consoles/DeletarConsole.service";
 import UnicoConsoleService from "../services/Consoles/UnicoConsole.service";
+
+
 
 export default class ConsoleController {
   static async store(request: Request, response: Response) {
     const { nome, valor, dono, estado, observacao, disponivel } = request.body;
 
-    const console = CriarConsoleService.execute({
+    const console = CriarConsolesService.execute({
       nome,
       valor,
       dono,

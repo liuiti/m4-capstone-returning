@@ -5,9 +5,8 @@ import { AppDataSource } from "../../data-source";
 interface JogosDataParams {
   nome: string;
   valor: number;
-  descricao: string;
+  descricao_jogo: string;
   dono: string;
-  observacao: string;
   estado: string;
   disponivel: boolean;
 }
@@ -16,9 +15,8 @@ export default class CriarJogosService {
   static async execute({
     nome,
     valor,
-    descricao,
+    descricao_jogo,
     dono,
-    observacao,
     estado,
     disponivel,
   }: JogosDataParams): Promise<Jogo> {
@@ -27,9 +25,8 @@ export default class CriarJogosService {
     const jogo = jogoRepositorio.create({
       nome,
       valor,
-      descricao,
+      descricao_jogo,
       dono,
-      observacao,
       estado,
       disponivel,
     });

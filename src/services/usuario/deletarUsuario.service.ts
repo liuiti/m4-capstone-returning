@@ -3,22 +3,16 @@ import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
 import { DeleteResult } from "typeorm";
 
-interface UsuarioDataParams {
-  id: string;
-}
+export default class DeletarUsuarioService {
+  static async execute(id: string): Promise<DeleteResult> {
+    const usuarioRepositorio = AppDataSource.getRepository(Usuario);
 
-const DeletarUsuarioService = async ({
-  id,
-}: UsuarioDataParams): Promise<DeleteResult> => {
-  const usuarioRepositorio = AppDataSource.getRepository(Usuario);
+    const usuario = await usuarioRepositorio.findOne({ where: { id } });
 
-  const usuario = await usuarioRepositorio.findOne({ where: { id } });
-   
-  if (!usuario) {
-    throw new AppError("Não foi encontrado nenhum usuario com esse id");
+    if (!usuario) {
+      throw new AppError("Não foi encontrado nenhum usuario com esse id");
+    }
+
+    return await usuarioRepositorio.delete(id);
   }
-
-  return await usuarioRepositorio.delete(id);
-};
-
-export default DeletarUsuarioService;
+}

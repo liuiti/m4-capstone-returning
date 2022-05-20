@@ -2,15 +2,15 @@ import { Console } from "../../models/Consoles";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
 
-const UnicoConsoloService = async (id: string) => {
-  const consoleRepositorio = AppDataSource.getRepository(Console);
-  const listarConsole = await consoleRepositorio.findOne({ where: { id } });
+export default class UnicoConsoleService {
+  static async execute(id: string): Promise<Console> {
+    const consoleRepositorio = AppDataSource.getRepository(Console);
+    const console = await consoleRepositorio.findOne({ where: { id } });
 
-  if (!listarConsole) {
-    throw new AppError("Console inexistente!", 401);
+    if (!console) {
+      throw new AppError("Console inexistente!");
+    }
+
+    return console;
   }
-
-  return listarConsole;
-};
-
-export default UnicoConsoloService;
+}

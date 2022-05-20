@@ -1,35 +1,24 @@
 import { Jogo } from "../../models/Jogos";
 import AppError from "../../errors/AppError";
 import { AppDataSource } from "../../data-source";
-
-interface JogosDataParams {
-  nome: string;
-  valor: number;
-  descricao: string;
-  dono: string;
-  observacao: string;
-  estado: string;
-  disponivel: boolean;
-}
+import { IJogosCriar } from "../../interfaces/Jogos";
 
 export default class CriarJogosService {
   static async execute({
     nome,
     valor,
-    descricao,
+    descricao_jogo,
     dono,
-    observacao,
     estado,
     disponivel,
-  }: JogosDataParams): Promise<Jogo> {
+  }: IJogosCriar): Promise<Jogo> {
     const jogoRepositorio = AppDataSource.getRepository(Jogo);
 
     const jogo = jogoRepositorio.create({
       nome,
       valor,
-      descricao,
       dono,
-      observacao,
+      descricao_jogo,
       estado,
       disponivel,
     });

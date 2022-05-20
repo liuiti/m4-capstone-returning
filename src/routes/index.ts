@@ -9,5 +9,4 @@ routes.use("/console",consoleRouter);
 routes.use("/jogos", jogoRouter);
 routes.use("/usuarios", usuarioRouter);
 
-
 export default routes;

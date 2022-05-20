@@ -10,7 +10,9 @@ export default class EnderecoController {
     const { cidade, estado, cep, rua, numero, bairro, complemento } =
       request.body;
 
-    const endereco = await CriarEnderecosService.execute({
+    const criarEndereco = new CriarEnderecosService();
+
+    const endereco = await criarEndereco.execute({
       cidade,
       estado,
       cep,

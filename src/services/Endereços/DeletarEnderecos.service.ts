@@ -14,7 +14,7 @@ export default class DeletarEnderecosService {
     });
 
     if (!enderecoUsuario) {
-      throw new AppError("Não encontrado nenhum endereço com esse id");
+      throw new AppError("Não encontrado nenhum endereço com esse id", 404);
     }
 
     return await enderecoRepositorio.delete(id);

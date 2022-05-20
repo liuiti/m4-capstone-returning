@@ -19,14 +19,14 @@ export default class AtualizarUsuarioService {
     const usuario = await usuarioRepositorio.findOne({ where: { id } });
 
     if (!usuario) {
-      throw new AppError("Não foi encontrado nenhum usuario com esse id");
+      throw new AppError("Não foi encontrado nenhum usuario com esse id", 404);
     }
 
     if (senha) {
       const senhaDecodificada = await compare(senha, usuario.senha);
 
       if (senhaDecodificada) {
-        throw new AppError("Passwords are the same");
+        throw new AppError("Passwords are the same", 406);
       }
     }
 

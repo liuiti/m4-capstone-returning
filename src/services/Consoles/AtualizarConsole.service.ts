@@ -18,7 +18,7 @@ export default class AtualizarConsoleService {
     const console = await consoleRepositorio.findOne({ where: { id } });
 
     if (!console) {
-      throw new AppError("Id do console inexistente!");
+      throw new AppError("Não encontrado nenhum console com esse id", 404);
     }
 
     nome ? (console.nome = nome) : console.nome;

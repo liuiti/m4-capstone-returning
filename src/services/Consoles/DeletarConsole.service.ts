@@ -10,7 +10,7 @@ export default class DeletarConsoleService {
     const console = await consoleRepositorio.findOne({ where: { id } });
 
     if (!console) {
-      throw new AppError("Id do console inexistente!");
+      throw new AppError("Não encontrado nenhum console com esse id", 404);
     }
 
     return await consoleRepositorio.delete(id);

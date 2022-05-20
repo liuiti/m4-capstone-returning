@@ -664,11 +664,7 @@
 
 "@types/dotenv@^8.2.0":
   version "8.2.0"
-<<<<<<< HEAD
-  resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-8.2.0.tgz#5cd64710c3c98e82d9d15844375a33bf1b45d053"
-=======
   resolved "https://registry.npmjs.org/@types/dotenv/-/dotenv-8.2.0.tgz"
->>>>>>> 7da520768fc7dc5475b5907a5f382768e1627a30
   integrity sha512-ylSC9GhfRH7m1EUXBXofhgx4lUWmFeQDINW5oLuS+gxWdfUeW4zJdeVTYVkexEW+e2VUvlZR2kGnGGipAWR7kw==
   dependencies:
     dotenv "*"
@@ -720,7 +716,7 @@
 
 "@types/jest@^27.5.1":
   version "27.5.1"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-27.5.1.tgz#2c8b6dc6ff85c33bcd07d0b62cb3d19ddfdb3ab9"
+  resolved "https://registry.npmjs.org/@types/jest/-/jest-27.5.1.tgz"
   integrity sha512-fUy7YRpT+rHXto1YlL+J9rs0uLGyiqVt3ZOTQR+4ROc47yNl8WLdVLgUloBRhOxP1PZvguHl44T3H0wAWxahYQ==
   dependencies:
     jest-matcher-utils "^27.0.0"

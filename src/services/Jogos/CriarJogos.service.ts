@@ -12,7 +12,7 @@ interface JogosDataParams {
 }
 
 export default class CriarJogosService {
-  static async execute({
+  async execute({
     nome,
     valor,
     descricao_jogo,

@@ -4,7 +4,6 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
-  ManyToMany,
 } from "typeorm";
 import { Jogo } from "./Jogos";
 import { Pedido } from "./Pedidos";

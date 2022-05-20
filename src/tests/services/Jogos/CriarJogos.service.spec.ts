@@ -1,6 +1,6 @@
-import { AppDataSource } from "./../../data-source";
+import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
-import CriarJogosService from "./CriarJogos.service";
+import CriarJogosService from "../../../services/Jogos/CriarJogos.service";
 
 describe("Deve ser capaz de criar um novo jogo", () => {
   let conexaoDb: any = DataSource;
@@ -24,6 +24,7 @@ describe("Deve ser capaz de criar um novo jogo", () => {
       valor: 10,
       descricao_jogo: "Jogo de aventura",
       dono: "returning",
+      observacao: "publico adulto",
       estado: "bom estado",
       disponivel: true,
     });

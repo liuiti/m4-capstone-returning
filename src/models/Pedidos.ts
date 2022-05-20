@@ -1,11 +1,4 @@
-import {
-  Entity,
-  Column,
-  PrimaryColumn,
-  OneToOne,
-  JoinColumn,
-  ManyToOne,
-} from "typeorm";
+import { Entity, Column, PrimaryColumn, JoinColumn, ManyToOne } from "typeorm";
 import { Carrinho } from "./Carrinhos";
 
 @Entity("pedidos")

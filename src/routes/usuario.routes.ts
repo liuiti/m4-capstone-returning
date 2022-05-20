@@ -2,9 +2,6 @@ import { Router } from "express";
 import UsuarioController from "../controllers/Usuario.controller";
 import usuarioInfoExiste from "../middlewares/usuarioInfoExiste.middlewares";
 
-
-
-
 const usuarioRouter = Router();
 
 usuarioRouter.post("/criar-usuario", UsuarioController.store); 

@@ -48,7 +48,7 @@ export default class UsuarioController {
   static async delete(request: Request, response: Response) {
     const { id } = request.params;
 
-    const usuario = DeletarUsuarioService.execute(id);
+    const usuario = await DeletarUsuarioService.execute(id);
 
     return response.status(200).json({ message: "Usuario deleteado" });
   }

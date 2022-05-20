@@ -664,11 +664,7 @@
 
 "@types/dotenv@^8.2.0":
   version "8.2.0"
-<<<<<<< HEAD
-  resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-8.2.0.tgz#5cd64710c3c98e82d9d15844375a33bf1b45d053"
-=======
   resolved "https://registry.npmjs.org/@types/dotenv/-/dotenv-8.2.0.tgz"
->>>>>>> 7da520768fc7dc5475b5907a5f382768e1627a30
   integrity sha512-ylSC9GhfRH7m1EUXBXofhgx4lUWmFeQDINW5oLuS+gxWdfUeW4zJdeVTYVkexEW+e2VUvlZR2kGnGGipAWR7kw==
   dependencies:
     dotenv "*"

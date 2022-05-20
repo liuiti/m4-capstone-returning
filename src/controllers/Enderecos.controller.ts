@@ -53,8 +53,10 @@ export default class EnderecoController {
   static async delete(request: Request, response: Response) {
     const { id } = request.params;
 
-    await DeletarEnderecosService.execute(id);
+    const endereco = await DeletarEnderecosService.execute(id);
 
-    return response.status(200).json();
+    return response
+      .status(200)
+      .json({ message: "Endereco deletado", enderecoDeletado: endereco });
   }
 }

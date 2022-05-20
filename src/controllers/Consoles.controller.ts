@@ -6,8 +6,6 @@ import CriarConsolesService from "../services/Consoles/CriarConsole.service";
 import DeletarConsoleService from "../services/Consoles/DeletarConsole.service";
 import UnicoConsoleService from "../services/Consoles/UnicoConsole.service";
 
-
-
 export default class ConsoleController {
   static async store(request: Request, response: Response) {
     const { nome, valor, dono, estado, observacao, disponivel } = request.body;
@@ -63,6 +61,8 @@ export default class ConsoleController {
     const { id } = request.body;
     const deletarConsole = DeletarConsoleService.execute(id);
 
-    return response.status(200).json({ message: "Console deletado" });
+    return response
+      .status(200)
+      .json({ message: "Console deletado", consoleDeletado: deletarConsole });
   }
 }

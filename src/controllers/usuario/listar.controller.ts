@@ -1,6 +1,6 @@
 import { Request, response, Response } from "express";
 import { AppDataSource } from "../../data-source";
-import { Usuario } from "../../entities/Usuarios";
+import { Usuario } from "../../entities/usuario.entity";
 
 const listarUsuarioController = async (req: Request, res: Response) => {
   const usuariosRepositorio = AppDataSource.getRepository(Usuario);

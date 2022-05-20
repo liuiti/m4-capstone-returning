@@ -1,4 +1,4 @@
-import { Usuario } from "../../entities/Usuarios";
+import { Usuario } from "../../entities/usuario.entity";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
 import { DeleteResult } from "typeorm";

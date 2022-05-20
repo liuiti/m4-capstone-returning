@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
-import { Jogo } from "./Jogos";
-import { Console } from "./Consoles";
+import { Jogo } from "./jogo.entity";
+import { Console } from "./console.entity";
 
 @Entity("pedidos")
 export class Pedido {

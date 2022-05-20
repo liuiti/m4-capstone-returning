@@ -1,4 +1,4 @@
-import { Console } from "../../entities/Consoles";
+import { Console } from "../../entities/console.entity";
 import IConsoleCriar from "../../interfaces/Console";
 import { AppDataSource } from "../../data-source";
 const CriarConsolesService = async ({
@@ -8,24 +8,22 @@ const CriarConsolesService = async ({
   estado,
   observacao,
   disponivel,
- 
 }: IConsoleCriar) => {
   const consoleRepositorio = AppDataSource.getRepository(Console);
 
-  const novoConsole = new Console;
+  const novoConsole = new Console();
   novoConsole.nome = nome;
   novoConsole.valor = valor;
   novoConsole.dono = dono;
-  novoConsole.estado= estado;
+  novoConsole.estado = estado;
   novoConsole.observacao = observacao;
   novoConsole.disponivel = disponivel;
 
   consoleRepositorio.create(novoConsole);
 
-  await consoleRepositorio.save(novoConsole)
+  await consoleRepositorio.save(novoConsole);
 
   return novoConsole;
-  
 };
 
 export default CriarConsolesService;

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { AppDataSource } from "../data-source";
-import { Usuario } from "../entities/Usuarios";
+import { Usuario } from "../entities/usuario.entity";
 import AppError from "../errors/AppError";
 
 export default async function usuarioInfoExiste(

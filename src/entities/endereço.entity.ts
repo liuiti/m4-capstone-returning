@@ -6,7 +6,7 @@ import {
   JoinColumn,
   JoinTable,
 } from "typeorm";
-import { Usuario } from "./Usuarios";
+import { Usuario } from "./usuario.entity";
 
 @Entity("enderecos")
 export class Endereco {

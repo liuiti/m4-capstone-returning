@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { AppDataSource } from "../data-source";
-import { endereco } from "../models/Endereços";
-import CriarEnderecosService from "../services/Endereços/CriarEnderecos.service";
-import AtualizarEnderecosService from "../services/Endereços/AtualizarEnderecos.service";
-import DeletarEnderecosService from "../services/Endereços/DeletarEnderecos.service";
+import { AppDataSource } from "../../data-source";
+import { Endereco } from "../../entities/endereço.entity";
+import CriarEnderecosService from "../../services/Endereços/CriarEnderecos.service";
+import AtualizarEnderecosService from "../../services/Endereços/AtualizarEnderecos.service";
+import DeletarEnderecosService from "../../services/Endereços/DeletarEnderecos.service";
 
 export default class EnderecosController {
   static async store(request: Request, response: Response) {
@@ -22,7 +22,7 @@ export default class EnderecosController {
     return response.status(201).json(endereco);
   }
   static async index(request: Request, response: Response) {
-    const enderecoRepositorio = AppDataSource.getRepository(endereco);
+    const enderecoRepositorio = AppDataSource.getRepository(Endereco);
 
     const enderecos = await enderecoRepositorio.find();
 

@@ -6,15 +6,14 @@ import CriarJogosService from "../../services/Jogos/CriarJogos.service";
 
 export default class JogosController {
   static async store(request: Request, response: Response) {
-    const { nome, valor, descricao, dono, observacao, estado, disponivel } =
+    const { nome, valor, descricao_jogo, dono, observacao, estado, disponivel } =
       request.body;
 
     const jogo = await CriarJogosService.execute({
       nome,
       valor,
-      descricao,
+      descricao_jogo,
       dono,
-      observacao,
       estado,
       disponivel,
     });

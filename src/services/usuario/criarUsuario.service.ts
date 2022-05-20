@@ -5,7 +5,7 @@ import { hash } from "bcrypt";
 import { IUsuarioCriar } from "../../interfaces/Usuario";
 
 export default class CriarUsuarioService {
-  static async execute({
+  async execute({
     nome,
     cpf,
     email,

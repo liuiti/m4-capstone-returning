@@ -16,7 +16,9 @@ export default class JogosController {
       disponivel,
     } = request.body;
 
-    const jogo = await CriarJogosService.execute({
+    const criarJogo = new CriarJogosService();
+
+    const jogo = await criarJogo.execute({
       nome,
       valor,
       descricao_jogo,

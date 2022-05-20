@@ -1,9 +1,15 @@
-import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  OneToOne,
+  JoinColumn,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Usuario } from "./Usuarios";
 
 @Entity("enderecos")
 export class Endereco {
-  @PrimaryColumn("bigint")
+  @PrimaryGeneratedColumn("increment")
   readonly id: string;
 
   @Column({ type: "varchar", length: 128 })
@@ -27,12 +33,9 @@ export class Endereco {
   @Column({ type: "varchar", length: 100, nullable: true })
   complemento: string;
 
-  @Column({ type: "varchar", length: 128, unique: true })
-  usuario_id: string;
-
   @OneToOne(() => Usuario, (usuario) => usuario.id, {
     eager: true,
   })
   @JoinColumn()
-  usuario: Usuario[];
+  usuario: Usuario;
 }

@@ -27,6 +27,7 @@ describe("Deve ser capaz de criar um novo endereço", () => {
       numero: "25",
       bairro: "bairroTeste",
       complemento: "complementoTeste",
+      usuarioId: 1,
     });
     expect(endereco).toBeTruthy();
   });

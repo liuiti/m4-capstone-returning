@@ -7,7 +7,7 @@ import DeletarEnderecosService from "../services/Endereços/DeletarEnderecos.ser
 
 export default class EnderecoController {
   static async store(request: Request, response: Response) {
-    const { cidade, estado, cep, rua, numero, bairro, complemento } =
+    const { cidade, estado, cep, rua, numero, bairro, complemento, usuarioId } =
       request.body;
 
     const criarEndereco = new CriarEnderecosService();
@@ -20,6 +20,7 @@ export default class EnderecoController {
       numero,
       bairro,
       complemento,
+      usuarioId,
     });
     return response.status(201).json(endereco);
   }

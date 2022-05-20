@@ -1,4 +1,4 @@
-import { Console } from "console";
+import { Console } from "../models/Consoles";
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import AtualizarConsoleService from "../services/Consoles/AtualizarConsole.service";
@@ -10,7 +10,9 @@ export default class ConsoleController {
   static async store(request: Request, response: Response) {
     const { nome, valor, dono, estado, observacao, disponivel } = request.body;
 
-    const console = CriarConsolesService.execute({
+    const criarConsole = new CriarConsolesService();
+
+    const console = await criarConsole.execute({
       nome,
       valor,
       dono,
@@ -26,14 +28,13 @@ export default class ConsoleController {
     const consoleRepositorio = AppDataSource.getRepository(Console);
 
     const listarConsoles = await consoleRepositorio.find();
-
     return response.status(200).json(listarConsoles);
   }
 
   static async show(request: Request, response: Response) {
     const { id } = request.params;
 
-    const listarConsole = UnicoConsoleService.execute(id);
+    const listarConsole = await UnicoConsoleService.execute(id);
 
     return response.status(200).json(listarConsole);
   }
@@ -42,7 +43,7 @@ export default class ConsoleController {
     const { id } = request.params;
     const { nome, valor, dono, estado, observacao, disponivel } = request.body;
 
-    const console = AtualizarConsoleService.execute({
+    const console = await AtualizarConsoleService.execute({
       id,
       nome,
       valor,
@@ -58,8 +59,8 @@ export default class ConsoleController {
   }
 
   static async delete(request: Request, response: Response) {
-    const { id } = request.body;
-    const deletarConsole = DeletarConsoleService.execute(id);
+    const { id } = request.params;
+    const deletarConsole = await DeletarConsoleService.execute(id);
 
     return response
       .status(200)

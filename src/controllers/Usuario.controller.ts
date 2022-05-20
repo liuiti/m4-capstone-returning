@@ -9,7 +9,9 @@ export default class UsuarioController {
   static async store(request: Request, response: Response) {
     const { nome, cpf, email, telefone, senha, pendencia } = request.body;
 
-    const usuario = await CriarUsuarioService.execute({
+    const criarUsuario = new CriarUsuarioService();
+
+    const usuario = await criarUsuario.execute({
       nome,
       cpf,
       email,

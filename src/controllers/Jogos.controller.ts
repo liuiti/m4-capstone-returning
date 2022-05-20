@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
-import { Jogo } from "../entities/Jogos";
+import { Jogo } from "../models/Jogos";
 import CriarJogosService from "../services/Jogos/CriarJogos.service";
+import BuscarJogoService from "../services/Jogos/BuscarJogo.service";
 
 export default class JogosController {
   static async store(request: Request, response: Response) {
@@ -24,7 +25,14 @@ export default class JogosController {
 
     const jogos = await jogoRepositorio.find();
 
-    console.log(typeof jogos[0].valor);
     return response.json(jogos);
+  }
+
+  static async show(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const jogo = await BuscarJogoService(id);
+
+    return response.status(200).json(jogo);
   }
 }

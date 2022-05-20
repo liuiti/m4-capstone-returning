@@ -1,15 +1,8 @@
-import {
-  Entity,
-  Column,
-  PrimaryColumn,
-  OneToOne,
-  JoinColumn,
-  JoinTable,
-} from "typeorm";
-import { usuario } from "./Usuarios";
+import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
+import { Usuario } from "./Usuarios";
 
 @Entity("enderecos")
-export class endereco {
+export class Endereco {
   @PrimaryColumn("bigint")
   readonly id: string;
 
@@ -31,28 +24,15 @@ export class endereco {
   @Column({ type: "varchar", length: 128 })
   bairro: string;
 
-  @Column({ type: "varchar", length: 100 })
+  @Column({ type: "varchar", length: 100, nullable: true })
   complemento: string;
 
   @Column({ type: "varchar", length: 128, unique: true })
   usuario_id: string;
 
-  @OneToOne(() => usuario, (usuario) => usuario.id, {
+  @OneToOne(() => Usuario, (usuario) => usuario.id, {
     eager: true,
   })
   @JoinColumn()
-  usuario: usuario[];
+  usuario: Usuario[];
 }
-
-/* 
-
- @OneToOne(() => usuario, (usuario) => usuario.id)
-  @JoinColumn()
-  usuario: usuario;
-  
-  
-   @OneToOne(() => usuario, (usuario) => usuario.id, {
-    eager: true,
-  })
-  usuario: usuario;
-*/

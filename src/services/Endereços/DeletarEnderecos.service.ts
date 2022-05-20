@@ -1,4 +1,4 @@
-import { endereco } from "../../models/Endereços";
+import { Endereco } from "../../models/Enderecos";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
 import { DeleteResult } from "typeorm";

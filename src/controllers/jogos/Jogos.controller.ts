@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { AppDataSource } from "../data-source";
-import { Jogo } from "../models/Jogos";
-import CriarJogosService from "../services/Jogos/CriarJogos.service";
-import BuscarJogoService from "../services/Jogos/BuscarJogo.service";
+import { AppDataSource } from "../../data-source";
+import { Jogo } from "../../models/Jogos";
+import BuscarJogoService from "../../services/Jogos/BuscarJogo.service";
+import CriarJogosService from "../../services/Jogos/CriarJogos.service";
 
 export default class JogosController {
   static async store(request: Request, response: Response) {

@@ -1,33 +1,16 @@
-import {
-  Entity,
-  Column,
-  PrimaryColumn,
-  OneToOne,
-  OneToMany,
-  JoinTable,
-  JoinColumn,
-} from "typeorm";
-import { usuario } from "./Usuarios";
-import { pedido } from "./Pedidos";
+import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
+import { Usuario } from "./Usuarios";
 
 @Entity("carrinhos")
-export class carrinho {
+export class Carrinho {
   @PrimaryColumn("bigint")
   readonly id: string;
 
   @Column({ type: "varchar", length: 128 })
   usuario_id: string;
-  @OneToOne(() => usuario, (usuario) => usuario.id, {
+  @OneToOne(() => Usuario, (usuario) => usuario.id, {
     eager: true,
   })
   @JoinColumn()
-  usuario: usuario[];
-
-  @Column({ type: "varchar", length: 128 })
-  pedido_id: string;
-  @OneToMany(() => pedido, (pedido) => pedido.id, {
-    eager: true,
-  })
-  @JoinColumn()
-  pedido: pedido[];
+  usuario: Usuario[];
 }

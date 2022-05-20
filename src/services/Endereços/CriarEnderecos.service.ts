@@ -1,4 +1,4 @@
-import { endereco } from "../../models/Endereços";
+import { Endereco } from "../../models/Enderecos";
 import AppError from "../../errors/AppError";
 import { AppDataSource } from "../../data-source";
 
@@ -21,8 +21,8 @@ export default class CriarEnderecosService {
     numero,
     bairro,
     complemento,
-  }: EnderecosDataParams): Promise<endereco> {
-    const enderecoRepositorio = AppDataSource.getRepository(endereco);
+  }: EnderecosDataParams): Promise<Endereco> {
+    const enderecoRepositorio = AppDataSource.getRepository(Endereco);
 
     const enderecoUsuario = enderecoRepositorio.create({
       cidade,

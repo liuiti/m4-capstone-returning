@@ -1,4 +1,4 @@
-import { endereco } from "../../models/Endereços";
+import { Endereco } from "../../models/Enderecos";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
 
@@ -23,8 +23,8 @@ export default class AtualizarEnderecosService {
     numero,
     bairro,
     complemento,
-  }: EnderecoDataParams): Promise<endereco> {
-    const enderecoRepositorio = AppDataSource.getRepository(endereco);
+  }: EnderecoDataParams): Promise<Endereco> {
+    const enderecoRepositorio = AppDataSource.getRepository(Endereco);
 
     const enderecoUsuario = await enderecoRepositorio.findOne({
       where: { id },

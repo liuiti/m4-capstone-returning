@@ -1,25 +1,23 @@
-import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
-import { Jogo } from "./Jogos";
-import { console } from "./Consoles";
+import {
+  Entity,
+  Column,
+  PrimaryColumn,
+  OneToOne,
+  JoinColumn,
+  ManyToOne,
+} from "typeorm";
+import { Carrinho } from "./Carrinhos";
 
 @Entity("pedidos")
-export class pedido {
+export class Pedido {
   @PrimaryColumn("bigint")
   readonly id: string;
 
   @Column({ type: "varchar", length: 128, unique: true })
-  jogos_id: string;
-  @OneToOne(() => Jogo, (jogo) => jogo.id, {
+  carrinho_id: string;
+  @ManyToOne(() => Carrinho, (carrinho) => carrinho.id, {
     eager: true,
   })
   @JoinColumn()
-  Jogo: Jogo[];
-
-  @Column({ type: "varchar", length: 128, unique: true })
-  console_id: string;
-  @OneToOne(() => console, (console) => console.id, {
-    eager: true,
-  })
-  @JoinColumn()
-  console: console[];
+  carrinho: Carrinho[];
 }

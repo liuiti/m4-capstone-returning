@@ -1,7 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("usuarios")
-export class usuario {
+export class Usuario {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 

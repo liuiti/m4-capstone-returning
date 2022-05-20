@@ -23,11 +23,5 @@ export class Carrinho {
   @JoinColumn()
   usuario: Usuario[];
 
-  @Column({ type: "varchar", length: 128 })
-  pedido_id: string;
-  @OneToMany(() => Pedido, (pedido) => pedido.id, {
-    eager: true,
-  })
-  @JoinColumn()
-  pedido: Pedido[];
+
 }

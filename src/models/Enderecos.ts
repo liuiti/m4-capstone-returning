@@ -1,9 +1,16 @@
-import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  PrimaryColumn,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
 import { Usuario } from "./Usuarios";
 
 @Entity("enderecos")
 export class Endereco {
-  @PrimaryColumn("bigint")
+  @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
   @Column({ type: "varchar", length: 128 })

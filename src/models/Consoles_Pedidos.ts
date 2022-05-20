@@ -1,7 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, ManyToMany } from "typeorm";
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
 import { Pedido } from "./Pedidos";
 import { Console } from "./Consoles";
-
 
 @Entity("consoles_pedidos")
 export class Console_Pedido {

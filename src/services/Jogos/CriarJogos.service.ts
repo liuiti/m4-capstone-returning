@@ -17,8 +17,8 @@ export default class CriarJogosService {
     const jogo = jogoRepositorio.create({
       nome,
       valor,
-      dono,
       descricao_jogo,
+      dono,
       estado,
       disponivel,
     });

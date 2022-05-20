@@ -1,5 +1,6 @@
 # m4-capstone-returning
 
+
 ---------------------------------
 
 **Rotas para usuários não logados:
@@ -72,4 +73,15 @@ Dados necessário para a devolução:
 "observacao":"Descreva_aqui_se_algo_aconteceu_ou_se_não_houve_nada"
 }
 
+
+
+tabela endereços ok
+
+tabela usuário ok
+
+tabela carrinho ok
+
+tabela pedido
+confirmar relação daquela bolinha que deixaram com a tabela pedidos_consoles. esta com dois 
+carrinho_id
 

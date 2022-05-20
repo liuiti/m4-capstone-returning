@@ -34,9 +34,9 @@ Dados necessário para enviar:
 
 Para a criação de um usuário, acesse a seguinte rota:
 
-#POST BASE_URL/novousuario
+#POST BASE_URL/usuarios/criar-usuario
 
-Dados necessário para enviar:
+Dados necessário para enviar no corpo da requisição:
 
 {
 "email":"seu_email_aqui",
@@ -45,6 +45,10 @@ Dados necessário para enviar:
 "nome":"seu_nome_aqui",
 "telefone":"seu_telefone_aqui"
 }
+
+Caso o email já exista no banco dados, será retornado a mensagem de "mail já existe".
+Caso algum campo não seja enviado, será retornado a mensagem de "Dados incorretos".
+Outros erros retornará a mensagem de "Internal Server Error"
 
 ---------------------------------
 

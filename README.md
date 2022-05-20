@@ -2,34 +2,6 @@
 
 ---------------------------------
 
-**Rotas para usuários não logados:
-
-Os usuários não logados poderão visualizar todos os games e consoles através das rotas get destes produtos. Por exemplo:
-
-#get BASE_URL/jogos
-Lista todo os jogos disponíveis na locadora
-
-#get BASE_URL/consoles
-Lista todos od consoles disponiveis na locadora
-
----------------------------------
-
-**Rota de login:
-
-Os usuários logados poderão alugar jogos e consoles. Para fazer o login, acesse a seguinte rota:
-
-#POST BASE_URL/login
-Nesta rota o usuário cadastrado poderá fazer o login na locadora e recebrá um token para validação
-
-Dados necessário para enviar:
-
-{
-"email":"seu_email_aqui",
-"senha":"sua_senha_em_string"
-}
-
---------------------------------- 
-
 **Rota de criação de usuário
 
 Para a criação de um usuário, acesse a seguinte rota:
@@ -48,9 +20,65 @@ Dados necessário para enviar no corpo da requisição:
 
 Caso o email já exista no banco dados, será retornado a mensagem de "mail já existe".
 Caso algum campo não seja enviado, será retornado a mensagem de "Dados incorretos".
-Outros erros retornará a mensagem de "Internal Server Error"
+Outros erros retornarão a mensagem de "Internal Server Error"
 
 ---------------------------------
+
+**Rota de atualização de usuário
+
+Para atualizar um usuário, use a seguinte rota:
+PATCH BASE_URL/usuarios/atualizar
+
+Dados necessários
+Envie o dados que deseje atualizar e o seu novo valor. Exemplo:
+
+"email":"novo_email"
+
+Você poderá passar mais de um dado case necessário, da seguinte forma:
+
+"email":"novo_email",
+"senha":"nova_senha"
+
+O valor de retorno será sempre o usuário com todas as chaves, já atualizadas. Caso você enviei alguma
+chave inexistente, será retornado o usuário com o id fornecido como parâmetro na URL e a chave inexistente será desconsiderada.
+
+---------------------------------
+
+**Rota de deletar usuários
+
+Para deletar um usuário, use a seguinte rota:
+
+PATCH BASE_URL/usuarios/deletar/id_do_usuario
+
+Caso tudo ocorra bem, será retornado uma mensagem de usuário deletado. 
+Caso passe o id de um usuário inexistente, a mensagem de "internal server" erro será retornada 
+
+---------------------------------
+
+**Rotas de listar usuários:
+
+Os usuários poderão ser listados na seguinte rota.
+
+#get BASE_URL/usuarios
+Lista todo os jogos disponíveis na locadora
+
+---------------------------------
+
+**Rota de login:
+
+Os usuários logados poderão alugar jogos e consoles. Para fazer o login, acesse a seguinte rota:
+
+#POST BASE_URL/login
+Nesta rota o usuário cadastrado poderá fazer o login na locadora e recebrá um token para validação
+
+Dados necessário para enviar:
+
+{
+"email":"seu_email_aqui",
+"senha":"sua_senha_em_string"
+}
+
+
 
 **Rota de locação de produtos
 

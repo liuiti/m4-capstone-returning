@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn, ManyToOne } from "typeorm";
 import { Console } from "./Consoles";
 import { Carrinho } from "./Carrinhos";
 
@@ -8,16 +8,8 @@ export class Pedido {
   readonly id: string;
 
   @Column({ type: "varchar", length: 128, unique: true })
-  console_id: string;
-  @OneToOne(() => Console, (console) => console.id, {
-    eager: true,
-  })
-  @JoinColumn()
-  console: Console[];
-
-  @Column({ type: "varchar", length: 128, unique: true })
   carrinho_id: string;
-  @OneToOne(() => Carrinho, (carrinho) => carrinho.id, {
+  @ManyToOne(() => Carrinho, (carrinho) => carrinho.id, {
     eager: true,
   })
   @JoinColumn()

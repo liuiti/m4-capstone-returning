@@ -3,8 +3,8 @@ import { Pedido } from "./Pedidos";
 import { Console } from "./Consoles";
 
 
-@Entity("pedidos_consoles")
-export class Pedidos_Consoles {
+@Entity("consoles_pedidos")
+export class Console_Pedido {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
@@ -14,11 +14,11 @@ export class Pedidos_Consoles {
     eager: true,
   })
   @JoinColumn()
-  id_pedido: Pedido[];
+  pedido: Pedido[];
 
   @Column({ type: "varchar", length: 128 })
   console_id: string;
   @ManyToOne(() => Console, (console_id) => console_id.id)
   @JoinColumn()
-  console_pedido: Console[];
+  console: Console[];
 }

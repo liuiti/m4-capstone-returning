@@ -1,14 +1,5 @@
-import {
-  Entity,
-  Column,
-  PrimaryColumn,
-  OneToOne,
-  OneToMany,
-  JoinTable,
-  JoinColumn,
-} from "typeorm";
+import { Entity, Column, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
 import { Usuario } from "./Usuarios";
-import { Pedido } from "./Pedidos";
 
 @Entity("carrinhos")
 export class Carrinho {
@@ -22,6 +13,4 @@ export class Carrinho {
   })
   @JoinColumn()
   usuario: Usuario[];
-
-
 }

@@ -9,7 +9,7 @@ export class Jogo {
   nome: string;
 
   @Column({ type: "varchar", length: 256 })
-  descricao: string;
+  descricao_jogo: string;
 
   @Column({ type: "decimal", precision: 8, scale: 2 })
   valor: number;
@@ -19,9 +19,6 @@ export class Jogo {
 
   @Column({ type: "varchar", length: 128 })
   estado: string;
-
-  @Column({ type: "varchar", length: 256 })
-  observacao: string;
 
   @Column()
   disponivel: boolean;

@@ -4,7 +4,7 @@ import { Pedido } from "./Pedidos";
 
 
 @Entity("jogos_pedidos")
-export class Jogos_Pedidos {
+export class Jogo_Pedido {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 

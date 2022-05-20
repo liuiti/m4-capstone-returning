@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryColumn, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Entity,
+  Column,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Carrinho } from "./Carrinhos";
 
 @Entity("pedidos")

@@ -17,4 +17,5 @@ export interface IEnderecosCriar {
   numero: string;
   bairro: string;
   complemento?: string;
+  usuarioId: any;
 }

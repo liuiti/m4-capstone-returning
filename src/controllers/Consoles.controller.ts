@@ -62,8 +62,6 @@ export default class ConsoleController {
     const { id } = request.params;
     const deletarConsole = await DeletarConsoleService.execute(id);
 
-    return response
-      .status(200)
-      .json({ message: "Console deletado", consoleDeletado: deletarConsole });
+    return response.status(200).json({ message: "Console deleted" });
   }
 }

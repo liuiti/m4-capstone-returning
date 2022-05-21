@@ -58,8 +58,6 @@ export default class EnderecoController {
 
     const endereco = await DeletarEnderecosService.execute(id);
 
-    return response
-      .status(200)
-      .json({ message: "Endereco deletado", enderecoDeletado: endereco });
+    return response.status(200).json({ message: "Address deleted" });
   }
 }

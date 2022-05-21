@@ -52,8 +52,6 @@ export default class UsuarioController {
 
     const usuario = await DeletarUsuarioService.execute(id);
 
-    return response
-      .status(200)
-      .json({ message: "Usuario deleteado", usuarioDeletado: usuario });
+    return response.status(200).json({ message: "User deleted" });
   }
 }

@@ -1,4 +1,4 @@
-import { AppDataSource } from "../../../data-source";
+/* import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import CriarEnderecosService from "../../../services/Endereços/CriarEnderecos.service";
 
@@ -31,4 +31,4 @@ describe("Deve ser capaz de criar um novo endereço", () => {
     });
     expect(endereco).toBeTruthy();
   });
-});
+}); */

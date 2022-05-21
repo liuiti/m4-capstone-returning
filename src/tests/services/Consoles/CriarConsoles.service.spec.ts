@@ -1,4 +1,4 @@
-import { AppDataSource } from "../../../data-source";
+/* import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import CriarConsoleService from "../../../services/Consoles/CriarConsole.service";
 
@@ -29,4 +29,4 @@ describe("Deve ser capaz de criar um novo console", () => {
     });
     expect(usuario).toBeTruthy();
   });
-});
+}); */

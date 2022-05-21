@@ -1,4 +1,4 @@
-import { AppDataSource } from "../../../data-source";
+/* import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import CriarJogosService from "../../../services/Jogos/CriarJogos.service";
 
@@ -31,4 +31,4 @@ describe("Deve ser capaz de criar um novo jogo", () => {
 
     expect(jogo).toBeTruthy();
   });
-});
+}); */

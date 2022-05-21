@@ -1,12 +1,16 @@
 import { AppDataSource } from "../../data-source";
-import { Jogo } from "../../entities/Jogos";
+import { Jogo } from "../../models/Jogos";
 import AppError from "../../errors/AppError";
 
-const ListarJogosService = async () => {
-  const jogosRepository = AppDataSource.getRepository(Jogo);
-  const jogosLista = await jogosRepository.find();
-  console.log(jogosLista);
-  return jogosLista;
-};
+export default class ListarJogosService {
+  static async execute() {
+    const jogosRepository = AppDataSource.getRepository(Jogo);
+    const jogosLista = await jogosRepository.find();
 
-export default ListarJogosService;
+    if (!jogosLista) {
+      throw new AppError("Lista Vazia!", 401);
+    }
+    console.log(jogosLista);
+    return jogosLista;
+  }
+}

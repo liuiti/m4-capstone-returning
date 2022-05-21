@@ -1,42 +1,34 @@
-import { Jogo } from "../../entities/Jogos";
-import AppError from "../../errors/AppError";
+import { Jogo } from "../../models/Jogos";
 import { AppDataSource } from "../../data-source";
+import { IJogosCriar } from "../../interfaces/Jogos";
+import AppError from "../../errors/AppError";
 
-interface JogosDataParams {
-  nome: string;
-  valor: number;
-  descricao: string;
-  dono: string;
-  observacao: string;
-  estado: string;
-  disponivel: boolean;
-}
-
-const CriarJogoService = async ({
-  nome,
-  valor,
-  descricao,
-  dono,
-  observacao,
-  estado,
-  disponivel,
-}: JogosDataParams): Promise<Jogo> => {
-  const jogoRepositorio = AppDataSource.getRepository(Jogo);
-  console.log(nome, "to no service");
-  const jogo = jogoRepositorio.create({
+export default class CriarJogosService {
+  static async execute({
     nome,
     valor,
-    descricao,
+    descricao_jogo,
     dono,
-    observacao,
     estado,
     disponivel,
-  });
+  }: IJogosCriar): Promise<Jogo> {
+    const jogoRepositorio = AppDataSource.getRepository(Jogo);
 
-  await jogoRepositorio.save(jogo);
+    if (!nome || !valor || !descricao_jogo || !dono || !estado || !disponivel) {
+      throw new AppError("All fields required");
+    }
 
-  console.log(jogo);
-  return jogo;
-};
+    const jogo = jogoRepositorio.create({
+      nome,
+      valor,
+      descricao_jogo,
+      dono,
+      estado,
+      disponivel,
+    });
 
-export default CriarJogoService;
+    await jogoRepositorio.save(jogo);
+
+    return jogo;
+  }
+}

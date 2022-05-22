@@ -16,3 +16,13 @@ export interface IUsuarioCriar {
   senha: string;
   pendencia: boolean;
 }
+
+export interface IUsuarioCriarTwo {
+  nome: string;
+  cpf: string;
+  email: string;
+  telefone: number;
+  senha: string;
+  pendencia: boolean;
+  carrinho: Array<any>[]
+}

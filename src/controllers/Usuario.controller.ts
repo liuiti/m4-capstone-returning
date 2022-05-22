@@ -5,6 +5,8 @@ import AtualizarUsuarioService from "../services/usuario/atualizarUsuario.servic
 import CriarUsuarioService from "../services/usuario/criarUsuario.service";
 import DeletarUsuarioService from "../services/usuario/deletarUsuario.service";
 
+const nodemailer = require("nodemailer");
+
 export default class UsuarioController {
   static async store(request: Request, response: Response) {
     const { nome, cpf, email, telefone, senha, pendencia } = request.body;
@@ -19,6 +21,37 @@ export default class UsuarioController {
       senha,
       pendencia,
     });
+
+
+
+    var transport = nodemailer.createTransport({
+      host: "smtp.mailtrap.io",
+      port: 2525,
+      auth: {
+        user: "2b05ea152a00d5",
+        pass: "1c50014392317c",
+      },
+    });
+
+    let message = {
+      from: "noreplay@rtng.com.br",
+      to: `${email}`,
+      subject: "Cadastro realizado com sucesso",
+      text: "Sua nova melhor locadora agora a um clique",
+      html: "<p>Olá. Obrigado por ser cadastrar na Returning</p>",
+    };
+
+
+    transport.sendMail(message, function(err:any) {
+      if (err) {
+        return response.status(400).json({
+          erro: true,
+          msg: 'Erro durante o envio de e-mail'
+        })
+      }
+    })
+
+
 
     return response.status(201).json(usuario);
   }

@@ -11,8 +11,11 @@ export default class AlugarJogoService {
         
         const carrinhoRepositorio = AppDataSource.getRepository(Carrinho);
 
-        const usuarioRepositorio = AppDataSource.getRepository(Usuario);
+        const usuariosRepositorio = AppDataSource.getRepository(Usuario);
 
+        // const donoDoPedido = usuariosRepositorio.find({
+        //     select: id
+        // })
 
         const carrinho = carrinhoRepositorio.create({
             id

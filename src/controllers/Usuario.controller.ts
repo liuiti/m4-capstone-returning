@@ -5,7 +5,7 @@ import AtualizarUsuarioService from "../services/usuario/atualizarUsuario.servic
 import CriarUsuarioService from "../services/usuario/criarUsuario.service";
 import DeletarUsuarioService from "../services/usuario/deletarUsuario.service";
 
-const nodemailer = require("nodemailer");
+ const nodemailer = require("nodemailer");
 
 export default class UsuarioController {
   static async store(request: Request, response: Response) {
@@ -21,7 +21,6 @@ export default class UsuarioController {
       senha,
       pendencia,
     });
-
 
 
     var transport = nodemailer.createTransport({

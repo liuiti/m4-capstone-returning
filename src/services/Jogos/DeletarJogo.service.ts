@@ -3,7 +3,7 @@ import { Jogo } from "../../models/Jogos";
 import AppError from "../../errors/AppError";
 
 export default class DeletarJogoService {
-  static async execute(id: string) {
+   async execute(id: string) {
     const jogosRepository = AppDataSource.getRepository(Jogo);
     const jogo = await jogosRepository.findOne({
       where: {

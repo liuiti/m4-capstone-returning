@@ -5,7 +5,7 @@ import { compare, hash } from "bcrypt";
 import { IUsuarioAtualizar } from "../../interfaces/Usuario";
 
 export default class AtualizarUsuarioService {
-  static async execute({
+   async execute({
     id,
     nome,
     cpf,

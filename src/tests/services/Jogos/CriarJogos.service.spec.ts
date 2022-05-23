@@ -24,7 +24,6 @@ describe("Deve ser capaz de criar um novo jogo", () => {
       valor: 10,
       descricao_jogo: "Jogo de aventura",
       dono: "returning",
-      observacao: "publico adulto",
       estado: "bom estado",
       disponivel: true,
     });

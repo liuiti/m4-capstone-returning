@@ -10,8 +10,10 @@ export default class JogosController {
   static async store(request: Request, response: Response) {
     const { nome, valor, descricao_jogo, dono, estado, disponivel } =
       request.body;
+    
+    const novoJogo = new CriarJogosService();
 
-    const jogo = await CriarJogosService.execute({
+    const jogo = await novoJogo.execute({
       nome,
       valor,
       descricao_jogo,
@@ -32,7 +34,9 @@ export default class JogosController {
   static async show(request: Request, response: Response) {
     const { id } = request.params;
 
-    const jogo = await BuscarJogoService.execute(id);
+    const novoJogo = new BuscarJogoService();
+
+    const jogo = await novoJogo.execute(id);
 
     return response.status(200).json(jogo);
   }
@@ -42,7 +46,9 @@ export default class JogosController {
       request.body;
     const { id } = request.params;
 
-    const jogo = await AtualizarJogosService.execute({
+    const attJogo = new AtualizarJogosService();
+
+    const jogo = await attJogo.execute({
       nome,
       valor,
       descricao_jogo,
@@ -58,7 +64,9 @@ export default class JogosController {
   static async delete(request: Request, response: Response) {
     const { id } = request.params;
 
-    await DeletarJogoService.execute(id);
+    const apagarJogo = new DeletarJogoService();
+
+    await apagarJogo.execute(id);
 
     return response.status(200).json({ message: "Game deleted" });
   }

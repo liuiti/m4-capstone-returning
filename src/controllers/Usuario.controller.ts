@@ -5,7 +5,7 @@ import AtualizarUsuarioService from "../services/usuario/atualizarUsuario.servic
 import CriarUsuarioService from "../services/usuario/criarUsuario.service";
 import DeletarUsuarioService from "../services/usuario/deletarUsuario.service";
 
- const nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer");
 
 export default class UsuarioController {
   static async store(request: Request, response: Response) {
@@ -21,7 +21,6 @@ export default class UsuarioController {
       senha,
       pendencia,
     });
-
 
     var transport = nodemailer.createTransport({
       host: "smtp.mailtrap.io",
@@ -40,28 +39,24 @@ export default class UsuarioController {
       html: "<p>Olá. Obrigado por ser cadastrar na Returning</p>",
     };
 
-
-    transport.sendMail(message, function(err:any) {
+    transport.sendMail(message, function (err: any) {
       if (err) {
         return response.status(400).json({
           erro: true,
-          msg: 'Erro durante o envio de e-mail'
-        })
+          msg: "Erro durante o envio de e-mail",
+        });
       }
-    })
-
-
+    });
 
     return response.status(201).json(usuario);
   }
-   async index(request: Request, response: Response) {
+  static async index(request: Request, response: Response) {
     const usuariosRepositorio = AppDataSource.getRepository(Usuario);
 
     const usuarios = await usuariosRepositorio.find();
 
     return response.status(200).json(usuarios);
   }
-
 
   static async update(request: Request, response: Response) {
     const { id } = request.params;

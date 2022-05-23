@@ -10,7 +10,7 @@ export default class ConsoleController {
   static async store(request: Request, response: Response) {
     const { nome, valor, dono, estado, observacao, disponivel } = request.body;
 
-    const console = CriarConsolesService.execute({
+    const console = await CriarConsolesService.execute({
       nome,
       valor,
       dono,
@@ -23,17 +23,17 @@ export default class ConsoleController {
   }
 
   static async index(request: Request, response: Response) {
-    const consoleRepositorio = AppDataSource.getRepository(Console);
+    const jogoRepositorio = AppDataSource.getRepository(Console);
 
-    const listarConsoles = await consoleRepositorio.find();
+    const jogos = await jogoRepositorio.find();
 
-    return response.status(200).json(listarConsoles);
+    return response.json(jogos);
   }
 
   static async show(request: Request, response: Response) {
     const { id } = request.params;
 
-    const listarConsole = UnicoConsoleService.execute(id);
+    const listarConsole = await UnicoConsoleService.execute(id);
 
     return response.status(200).json(listarConsole);
   }
@@ -42,7 +42,7 @@ export default class ConsoleController {
     const { id } = request.params;
     const { nome, valor, dono, estado, observacao, disponivel } = request.body;
 
-    const console = AtualizarConsoleService.execute({
+    const console = await AtualizarConsoleService.execute({
       id,
       nome,
       valor,
@@ -59,7 +59,7 @@ export default class ConsoleController {
 
   static async delete(request: Request, response: Response) {
     const { id } = request.body;
-    const deletarConsole = DeletarConsoleService.execute(id);
+    const deletarConsole = await DeletarConsoleService.execute(id);
 
     return response
       .status(200)

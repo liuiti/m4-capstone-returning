@@ -54,7 +54,7 @@ export default class UsuarioController {
 
     return response.status(201).json(usuario);
   }
-   async index(request: Request, response: Response) {
+   static async index(request: Request, response: Response) {
     const usuariosRepositorio = AppDataSource.getRepository(Usuario);
 
     const usuarios = await usuariosRepositorio.find();
@@ -63,7 +63,7 @@ export default class UsuarioController {
   }
 
 
-  static async update(request: Request, response: Response) {
+   static async update(request: Request, response: Response) {
     const { id } = request.params;
     const { nome, cpf, email, telefone, senha, pendencia } = request.body;
 
@@ -83,7 +83,7 @@ export default class UsuarioController {
       .status(200)
       .json({ message: "Usuario atualizado", usuarioAtualizado: usuario });
   }
-  static async delete(request: Request, response: Response) {
+    static async delete(request: Request, response: Response) {
     const { id } = request.params;
 
     const deletarUsuario = new DeletarUsuarioService();
@@ -91,5 +91,6 @@ export default class UsuarioController {
     const usuario = await deletarUsuario.execute(id);
 
     return response.status(200).json({ message: "User deleted" });
-  }
+   }
+  
 }

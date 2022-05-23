@@ -1,5 +1,4 @@
 import { AppDataSource } from "../../data-source"
-import IAlugelJogo from "../../interfaces/Aluguel"
 import { Carrinho } from "../../models/Carrinhos"
 import { Usuario } from "../../models/Usuarios";
 

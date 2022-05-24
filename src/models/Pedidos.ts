@@ -12,8 +12,9 @@ export class Pedido {
   @PrimaryGeneratedColumn("increment")
   readonly id: string;
 
-  @Column({ type: "varchar", length: 128, unique: true })
-  carrinho_id: string;
+  @Column({ type: "varchar", unique: true })
+  carrinhoId: string;
+
   @ManyToOne(() => Carrinho, (carrinho) => carrinho.id, {
     eager: true,
   })

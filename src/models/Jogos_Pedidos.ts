@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column } from "typeorm";
 import { Jogo } from "./Jogos";
 import { Pedido } from "./Pedidos";
 
@@ -6,6 +6,12 @@ import { Pedido } from "./Pedidos";
 export class Jogo_Pedido {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
+
+  @Column()
+  pedidoId: string;
+
+  @Column()
+  jogoId: string;
 
   @ManyToOne(() => Pedido, (pedido_id) => pedido_id.id, {
     eager: true,

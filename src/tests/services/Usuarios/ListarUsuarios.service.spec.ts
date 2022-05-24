@@ -1,6 +1,5 @@
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
-import CriarUsuarioService from "../../../services/usuario/criarUsuario.service";
 import UsuarioController from "../../../controllers/Usuario.controller"
 
 
@@ -19,5 +18,11 @@ describe("Deve ser capaz de criar um novo usuário", () => {
     await conexaoDb.destroy();
   });
 
+  test("Deve ser capaz de listar todos os usuários cadastrados no banco de dado", async () => {
+      const todosUsuarios = new UsuarioController();
 
+      const todos = todosUsuarios
+      expect(todos).toBeDefined()
+    
+  });
 });

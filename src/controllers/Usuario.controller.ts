@@ -5,11 +5,10 @@ import AtualizarUsuarioService from "../services/usuario/atualizarUsuario.servic
 import CriarUsuarioService from "../services/usuario/criarUsuario.service";
 import DeletarUsuarioService from "../services/usuario/deletarUsuario.service";
 
-const nodemailer = require("nodemailer");
-
 export default class UsuarioController {
   static async store(request: Request, response: Response) {
     const { nome, cpf, email, telefone, senha, pendencia } = request.body;
+    const nodemailer = require("nodemailer");
 
     const criarUsuario = new CriarUsuarioService();
 
@@ -50,6 +49,7 @@ export default class UsuarioController {
 
     return response.status(201).json(usuario);
   }
+
   static async index(request: Request, response: Response) {
     const usuariosRepositorio = AppDataSource.getRepository(Usuario);
 

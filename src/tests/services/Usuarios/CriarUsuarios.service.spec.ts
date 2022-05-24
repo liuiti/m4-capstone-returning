@@ -17,6 +17,8 @@ describe("Deve ser capaz de criar um novo usuário", () => {
     await conexaoDb.destroy();
   });
 
+  let teste = "";
+
   test("Deve ser capaz de inserir um novo usuário no database", async () => {
     const novoUsuario = new CriarUsuarioService();
     const usuario = await novoUsuario.execute({
@@ -27,7 +29,21 @@ describe("Deve ser capaz de criar um novo usuário", () => {
       senha: "12345",
       pendencia: true,
     });
+    teste = usuario.id;
     expect(usuario).toBeTruthy();
   });
 
+  /* test("should not be able to create an existing user", async () => {
+    const userData: usuario = {
+      name: "Test Existing Name",
+      email: "testexisting@test.com.br",
+      username: "testexisting",
+    };
+
+    await CriarUsuarioService.execute(userData);
+
+    await expect(CriarUsuarioService.execute(userData)).rejects.toEqual(
+      new Error("User already exists!")
+    );
+  }); */
 });

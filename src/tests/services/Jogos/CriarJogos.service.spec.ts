@@ -3,18 +3,18 @@ import { DataSource } from "typeorm";
 import CriarJogosService from "../../../services/Jogos/CriarJogos.service";
 
 describe("Deve ser capaz de criar um novo jogo", () => {
-  let conexaoDb: any = DataSource;
+  let connection: DataSource;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
-      .then((res) => (conexaoDb = res))
+      .then((res) => (connection = res))
       .catch((err) => {
         console.error("Error during data source initialization");
       });
   });
 
   afterAll(async () => {
-    await conexaoDb.destroy();
+    await connection.destroy();
   });
 
   test("Deve ser capaz de inserir um novo jogo no database", async () => {

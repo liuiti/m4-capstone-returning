@@ -23,9 +23,3 @@ describe("List all games", () => {
     expect(gameList).toHaveProperty("map");
   });
 });
-
-test("Deve ser capaz de listar todos os usuários cadastrados no banco de dado", async () => {
-  const todosUsuarios = new gamesListService();
-  const todos = todosUsuarios.execute();
-  expect(todos).toBeDefined();
-});

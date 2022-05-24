@@ -24,21 +24,7 @@ export default class CriarAluguelJogo {
       throw new AppError("Token não encontrado");
     }
 
-    //capturei o id do user
-    const { usuarioCarrinho, sub }: any = jwt.decode(token);
-    //capturei banco de dados de usuarios
-    const usuarioRepositorio = AppDataSource.getRepository(Usuario);
-    //capturei o usuario pelo ID
-    const usuario = await usuarioRepositorio.findOne({
-     where: {id: sub}
-    });
-    //validação do id do usuario
-    if (!usuario) {
-      throw new AppError("Usuário com esse id não existe");
-    }
-    
-    usuario.pendencia = true
-    console.log(usuario)
+
 
 
     const jogos = await jogoRepositorio.findBy({

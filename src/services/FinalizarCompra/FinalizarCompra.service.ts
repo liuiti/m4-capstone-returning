@@ -7,9 +7,10 @@ import { Console_Pedido } from "../../models/Consoles_Pedidos";
 import { Jogo_Pedido } from "../../models/Jogos_Pedidos";
 import { Jogo } from "../../models/Jogos";
 import { Console } from "../../models/Consoles";
+import jwt from "jsonwebtoken";
 
 export default class FinalizarCompraService {
-  static async execute(id: string) {
+  static async execute(id: string, token: string) {
     const carrinhoRepositorio = AppDataSource.getRepository(Carrinho);
 
     const usuarioRepositorio = AppDataSource.getRepository(Usuario);
@@ -75,8 +76,23 @@ export default class FinalizarCompraService {
       if (!jogos) {
         throw new AppError("Jogos não encontrado");
       }
-        jogos.disponivel = false
-        await jogoRepositorio.save(jogos)
+      jogos.disponivel = false;
+      await jogoRepositorio.save(jogos);
     });
+
+    //alterar o pedencnia = true do usuario após tudo isso
+
+    const {  sub }: any = jwt.decode(token);
+
+    let usuario = await usuarioRepositorio.findOne({
+      where: { id: sub },
+    });
+
+    if (!usuario) {
+      throw new AppError("Usuário com esse id não existe");
+    }
+
+    usuario.pendencia = true
   }
+  
 }

@@ -1,0 +1,1 @@
+passar o pendencias para true no usuario quando finalizar compras

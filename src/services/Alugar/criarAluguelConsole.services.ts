@@ -19,9 +19,11 @@ export default class CriarAluguelConsole {
     const consoles = await consoleRepositorio.findBy({
       id: In(console_id),
     });
+
     if (consoles.length !== console_id.length) {
       throw new AppError("Lista invalida com esse id");
     }
+
     const pedido = pedidoRepositorio.create({ carrinho_id: "1" });
 
     await pedidoRepositorio.save(pedido);
@@ -31,8 +33,10 @@ export default class CriarAluguelConsole {
         pedidoId: pedido.id,
         consoleId,
       });
+
       await consolePedidoRepositorio.save(consolePedido);
     });
+
     return pedido;
   }
 }

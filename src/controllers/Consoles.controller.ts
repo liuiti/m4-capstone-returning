@@ -1,4 +1,4 @@
-import { Console } from "console";
+import { Console } from "../models/Consoles";
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import AtualizarConsoleService from "../services/Consoles/AtualizarConsole.service";

@@ -11,26 +11,32 @@ interface Request {
 
 export default class CriarAluguelConsole {
   static async execute({ console_id }: Request): Promise<Pedido> {
+
     const pedidoRepositorio = AppDataSource.getRepository(Pedido);
-    const consolePedidoRepositorio =
-      AppDataSource.getRepository(Console_Pedido);
+
+    const consolePedidoRepositorio = AppDataSource.getRepository(Console_Pedido);
+
     const consoleRepositorio = AppDataSource.getRepository(Console);
 
     const consoles = await consoleRepositorio.findBy({
       id: In(console_id),
     });
+
     if (consoles.length !== console_id.length) {
       throw new AppError("Lista invalida com esse id");
     }
-    const pedido = pedidoRepositorio.create({ carrinho_id: "1" });
+
+    const pedido = pedidoRepositorio.create({ carrinho_id: "7" });
 
     await pedidoRepositorio.save(pedido);
 
     console_id.forEach(async (consoleId) => {
       const consolePedido = consolePedidoRepositorio.create({
-        pedidoId: pedido.id,
-        consoleId,
+     
+        pedido:pedido,  consoleId
+        
       });
+
       await consolePedidoRepositorio.save(consolePedido);
     });
     return pedido;

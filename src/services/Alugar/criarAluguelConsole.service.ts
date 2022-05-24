@@ -1,18 +1,14 @@
-import { Carrinho } from './../../models/Carrinhos';
 import { In } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
 import { Pedido } from "../../models/Pedidos";
 import { Console_Pedido } from "../../models/Consoles_Pedidos";
 import { Console } from "../../models/Consoles";
-import jwt from 'jsonwebtoken'
-
-
-
+import jwt from "jsonwebtoken";
 
 interface Request {
   console_id: string[];
-  token: string | undefined
+  token: string | undefined;
 }
 
 export default class CriarAluguelConsole {
@@ -25,10 +21,10 @@ export default class CriarAluguelConsole {
     const consoleRepositorio = AppDataSource.getRepository(Console);
 
     if (!token) {
-      throw new AppError('Token não encontrado')
+      throw new AppError("Token não encontrado");
     }
 
-    const { sub }: any = jwt.decode(token)
+    const { usuarioCarrinho }: any = jwt.decode(token);
 
     const consoles = await consoleRepositorio.findBy({
       id: In(console_id),
@@ -38,21 +34,7 @@ export default class CriarAluguelConsole {
       throw new AppError("Lista invalida com esse id");
     }
 
-    const carrinhoRepositorio = AppDataSource.getRepository(Carrinho);
-
-    const carrinho = carrinhoRepositorio.findBy({
-      usuario: sub
-    });
-
-    if (!carrinho) {
-      carrinhoRepositorio.create({
-        usuarioId: sub
-      })
-    }
-
-
-
-    const pedido = pedidoRepositorio.create({ carrinhoId: "1" });
+    const pedido = pedidoRepositorio.create({ carrinhoId: usuarioCarrinho });
 
     await pedidoRepositorio.save(pedido);
 

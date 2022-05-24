@@ -25,7 +25,6 @@ export default class FinalizarCompraService {
 
     const jogoRepositorio = AppDataSource.getRepository(Jogo);
 
-    //selecionar carrinho do usuario
     const carrinho = await carrinhoRepositorio.findOne({
       where: { usuarioId: id },
     });
@@ -33,7 +32,6 @@ export default class FinalizarCompraService {
     if (!carrinho) {
       throw new AppError("Carrinho não encontrado");
     }
-    //encontrando na tabela pedidos o crrinho com id igual do
     const pedidos = await pedidoRepositorio.findOne({
       where: { carrinhoId: carrinho.id },
     });
@@ -46,9 +44,18 @@ export default class FinalizarCompraService {
       pedidoId: pedidos.id,
     });
 
+    const jogoPedidos = await jogoPedidoRepositorio.findBy({
+      pedidoId: pedidos.id,
+    });
+
+    if (!jogoPedidos) {
+      throw new AppError("Jogos pedidos não encontrado");
+    }
+
     if (!consolePedidos) {
       throw new AppError("Consoles pedidos não encontrados");
     }
+
     consolePedidos.forEach(async (item) => {
       const consoles = await consoleRepositorio.findOne({
         where: { id: item.consoleId },
@@ -57,15 +64,19 @@ export default class FinalizarCompraService {
       if (!consoles) {
         throw new AppError("Consoles não encontrado");
       }
-
-        consoles.disponivel = false;
-        
-        await consoleRepositorio.save(consoles)
+      consoles.disponivel = false;
+      await consoleRepositorio.save(consoles);
     });
-      
-      
-      
-      
-      
+
+    jogoPedidos.forEach(async (item) => {
+      const jogos = await jogoRepositorio.findOne({
+        where: { id: item.jogoId },
+      });
+      if (!jogos) {
+        throw new AppError("Jogos não encontrado");
+      }
+        jogos.disponivel = false
+        await jogoRepositorio.save(jogos)
+    });
   }
 }

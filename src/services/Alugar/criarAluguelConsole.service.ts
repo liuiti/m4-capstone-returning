@@ -14,7 +14,6 @@ interface Request {
 export default class CriarAluguelConsole {
   static async execute({ console_id, token }: Request): Promise<Pedido> {
     const pedidoRepositorio = AppDataSource.getRepository(Pedido);
-
     const consolePedidoRepositorio =
       AppDataSource.getRepository(Console_Pedido);
 
@@ -29,6 +28,7 @@ export default class CriarAluguelConsole {
     const consoles = await consoleRepositorio.findBy({
       id: In(console_id),
     });
+
 
     if (consoles.length !== console_id.length) {
       throw new AppError("Lista invalida com esse id");

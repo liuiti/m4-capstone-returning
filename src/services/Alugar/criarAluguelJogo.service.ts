@@ -1,3 +1,4 @@
+import { Usuario } from './../../models/Usuarios';
 import { Jogo } from "./../../models/Jogos";
 import { In } from "typeorm";
 import { AppDataSource } from "../../data-source";
@@ -23,7 +24,22 @@ export default class CriarAluguelJogo {
       throw new AppError("Token não encontrado");
     }
 
-    const { usuarioCarrinho }: any = jwt.decode(token);
+    //capturei o id do user
+    const { usuarioCarrinho, sub }: any = jwt.decode(token);
+    //capturei banco de dados de usuarios
+    const usuarioRepositorio = AppDataSource.getRepository(Usuario);
+    //capturei o usuario pelo ID
+    const usuario = await usuarioRepositorio.findOne({
+     where: {id: sub}
+    });
+    //validação do id do usuario
+    if (!usuario) {
+      throw new AppError("Usuário com esse id não existe");
+    }
+    
+    usuario.pendencia = true
+    console.log(usuario)
+
 
     const jogos = await jogoRepositorio.findBy({
       id: In(jogo_id),
@@ -39,9 +55,8 @@ export default class CriarAluguelJogo {
 
     jogo_id.forEach(async (jogoId) => {
       const jogoPedido = jogoPedidoRepositorio.create({
-     
-          pedido: pedido,
-          jogoId
+        pedido: pedido,
+        jogoId,
       });
 
       await jogoPedidoRepositorio.save(jogoPedido);

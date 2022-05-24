@@ -38,10 +38,12 @@ export class AutenticacaoService {
     }
 
     const token = sign(
-      { usuarioCarrinho: carrinho?.id },
+
+       { usuarioCarrinho: carrinho?.id, },
+
       process.env.SECRET_KEY || "default",
       {
-        subject: usuario.id,
+        subject:usuario.id,
         expiresIn: "3d",
       }
     );

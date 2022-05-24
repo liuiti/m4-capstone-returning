@@ -12,6 +12,8 @@ export default class AlugarJogoController {
 
     token = token?.split(" ")[1];
 
+    const { sub }: any = token
+    
     const pedido = await CriarAluguelJogo.execute({ jogo_id, token });
 
     return response.status(201).json(pedido);

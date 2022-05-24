@@ -1,9 +1,16 @@
 import { Router } from "express";
 import AlugarConsoleController from "../controllers/AlugarConsole.controller";
+import AlugarJogoController from "../controllers/AlugarJogo.controller";
 
-const alugarConsoleRouter = Router();
+const alugarRouter = Router();
 
-alugarConsoleRouter.post("", AlugarConsoleController.store);
-alugarConsoleRouter.get("", AlugarConsoleController.index);
+/* ROTAS DE CONSOLES */
 
-export default alugarConsoleRouter;
+alugarRouter.post("/consoles", AlugarConsoleController.store);
+alugarRouter.get("/consoles", AlugarConsoleController.index);
+
+/* ROTAS DE JOGOS */
+
+alugarRouter.post("/jogos", AlugarJogoController.store);
+
+export default alugarRouter;

@@ -17,11 +17,11 @@ export class Jogo_Pedido {
     eager: true,
   })
   @JoinColumn()
-  pedido: Pedido[];
+  pedido: Pedido;
 
   @ManyToOne(() => Jogo, (jogo_id) => jogo_id.id, {
     eager: true,
   })
   @JoinColumn()
-  jogo: Jogo[];
+  jogo: Jogo;
 }

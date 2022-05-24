@@ -38,13 +38,13 @@ export default class CriarAluguelJogo {
     await pedidoRepositorio.save(pedido);
 
     jogo_id.forEach(async (jogoId) => {
-      const consolePedido = jogoPedidoRepositorio.create({
+      const jogoPedido = jogoPedidoRepositorio.create({
      
-          pedidoId:jogoId,
+          pedido: pedido,
           jogoId
       });
 
-      await jogoPedidoRepositorio.save(consolePedido);
+      await jogoPedidoRepositorio.save(jogoPedido);
     });
     return pedido;
   }

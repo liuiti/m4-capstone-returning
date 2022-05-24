@@ -4,6 +4,7 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  OneToMany
 } from "typeorm";
 import { Carrinho } from "./Carrinhos";
 
@@ -12,7 +13,7 @@ export class Pedido {
   @PrimaryGeneratedColumn("increment")
   readonly id: string;
 
-  @Column({ type: "varchar", unique: true })
+  @Column({ type: "varchar"})
   carrinhoId: string;
 
   @ManyToOne(() => Carrinho, (carrinho) => carrinho.id, {

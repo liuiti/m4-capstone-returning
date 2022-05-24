@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class CriandoTabelas1653401357069 implements MigrationInterface {
-    name = 'CriandoTabelas1653401357069'
+export class criarTabelas1653409884705 implements MigrationInterface {
+    name = 'criarTabelas1653409884705'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "usuarios" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "nome" character varying(128) NOT NULL, "cpf" character varying(11) NOT NULL, "email" character varying(128) NOT NULL, "telefone" integer NOT NULL, "senha" character varying(128) NOT NULL, "pendencia" boolean NOT NULL DEFAULT 'false', CONSTRAINT "PK_d7281c63c176e152e4c531594a8" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "carrinhos" ("id" SERIAL NOT NULL, "usuarioId" uuid NOT NULL, CONSTRAINT "REL_ff45b69dce2f1ce3032c0a41f8" UNIQUE ("usuarioId"), CONSTRAINT "PK_8ed80828de93327d4601c21c30f" PRIMARY KEY ("id"))`);
-        await queryRunner.query(`CREATE TABLE "pedidos" ("id" SERIAL NOT NULL, "carrinhoId" integer NOT NULL, CONSTRAINT "UQ_67b988fbaed54045427c28e7075" UNIQUE ("carrinhoId"), CONSTRAINT "PK_ebb5680ed29a24efdc586846725" PRIMARY KEY ("id"))`);
+        await queryRunner.query(`CREATE TABLE "pedidos" ("id" SERIAL NOT NULL, "carrinhoId" integer NOT NULL, CONSTRAINT "PK_ebb5680ed29a24efdc586846725" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "consoles" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "nome" character varying(128) NOT NULL, "valor" numeric(8,2) NOT NULL, "dono" character varying(128) NOT NULL, "estado" character varying(128) NOT NULL, "observacao" character varying(256) NOT NULL, "disponivel" boolean NOT NULL, CONSTRAINT "PK_bde30fa4acf34faf40555da2332" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "consoles_pedidos" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "pedidoId" integer NOT NULL, "consoleId" uuid NOT NULL, CONSTRAINT "PK_be6f9f5eeda101604abc86e061b" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "enderecos" ("id" SERIAL NOT NULL, "cidade" character varying(128) NOT NULL, "estado" character varying(2) NOT NULL, "cep" character varying(9) NOT NULL, "rua" character varying(50) NOT NULL, "numero" character varying(7) NOT NULL, "bairro" character varying(128) NOT NULL, "complemento" character varying(100), "usuarioId" uuid NOT NULL, CONSTRAINT "REL_3fda1857bc40b2c12b9562101a" UNIQUE ("usuarioId"), CONSTRAINT "PK_208b05002dcdf7bfbad378dcac1" PRIMARY KEY ("id"))`);

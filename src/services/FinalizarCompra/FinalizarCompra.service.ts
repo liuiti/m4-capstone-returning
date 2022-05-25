@@ -8,10 +8,9 @@ import { Jogo_Pedido } from "../../models/Jogos_Pedidos";
 import { Jogo } from "../../models/Jogos";
 import { Console } from "../../models/Consoles";
 
-
 export default class FinalizarCompraService {
   static async execute(id: string, token: string) {
-    let precoDoPedido = 0;
+    let total = 0;
 
     const carrinhoRepositorio = AppDataSource.getRepository(Carrinho);
 
@@ -44,15 +43,12 @@ export default class FinalizarCompraService {
       throw new AppError("Pedido não encontrado");
     }
 
-
     let usuario = await usuarioRepositorio.findOne({
       where: { id },
     });
     if (!usuario) {
       throw new AppError("Usuário com esse id não existe");
     }
-
-
 
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
     pedidos.forEach(async (pedido) => {
@@ -75,7 +71,7 @@ export default class FinalizarCompraService {
         if (!consoles) {
           throw new AppError("Consoles não encontrado");
         }
-        //  precoDoPedido += consoles.valor
+
         consoles.disponivel = false;
         await consoleRepositorio.save(consoles);
       });
@@ -88,16 +84,30 @@ export default class FinalizarCompraService {
           throw new AppError("Jogos não encontrado");
         }
         jogos.disponivel = false;
-        // precoDoPedido += jogos.valor
+
         await jogoRepositorio.save(jogos);
       });
-
-      
     });
-    
-    usuario.pendencia = true;
-    return usuario
+
+    pedidos.forEach(async (pedido) => {
+      const consolePedidos = await consolePedidosRepositorio.findBy({
+        pedidoId: pedido.id,
+      });
+      consolePedidos.forEach(async (item) => {
+        const consoles = await consoleRepositorio.findBy({
+          id: item.consoleId,
+        });
+
+        total += consoles.reduce((valorAntigo, valorAtual) => {
+          return Number(valorAntigo) + Number(valorAtual.valor);
+        }, 0);
+        carrinho.total = total;
+        await carrinhoRepositorio.save(carrinho);
+      });
+    });
+
+    console.log(carrinho.total);
+    return { usuario, carrinho };
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
-    
   }
 }

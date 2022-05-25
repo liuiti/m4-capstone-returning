@@ -3,7 +3,7 @@ import { Jogo } from "../../models/Jogos";
 import AppError from "../../errors/AppError";
 
 export default class BuscarJogoService {
-  static async execute(id: string) {
+   async execute(id: string) {
     const jogoRepositorio = AppDataSource.getRepository(Jogo);
 
     const jogo = await jogoRepositorio.findOne({ where: { id } });

@@ -33,7 +33,9 @@ export default class ConsoleController {
   static async show(request: Request, response: Response) {
     const { id } = request.params;
 
-    const listarConsole = await UnicoConsoleService.execute(id);
+    const novoListarConsole = new UnicoConsoleService();
+
+    const listarConsole = await novoListarConsole.execute(id);
 
     return response.status(200).json(listarConsole);
   }
@@ -42,7 +44,9 @@ export default class ConsoleController {
     const { id } = request.params;
     const { nome, valor, dono, estado, observacao, disponivel } = request.body;
 
-    const console = await AtualizarConsoleService.execute({
+    const atualizarConsole = new AtualizarConsoleService();
+
+    const console = await atualizarConsole.execute({
       id,
       nome,
       valor,
@@ -58,8 +62,10 @@ export default class ConsoleController {
   }
 
   static async delete(request: Request, response: Response) {
-    const { id } = request.body;
-    const deletarConsole = await DeletarConsoleService.execute(id);
+    const { id } = request.params;
+
+    const novoDeletarConsole = new DeletarConsoleService();
+    const deletarConsole = await novoDeletarConsole.execute(id);
 
     return response.status(200).json({ message: "Console deletado" });
   }

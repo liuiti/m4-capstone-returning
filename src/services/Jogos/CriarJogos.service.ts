@@ -4,7 +4,7 @@ import { IJogosCriar } from "../../interfaces/Jogos";
 import AppError from "../../errors/AppError";
 
 export default class CriarJogosService {
-  static async execute({
+   async execute({
     nome,
     valor,
     descricao_jogo,

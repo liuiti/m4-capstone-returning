@@ -8,6 +8,7 @@ import DeletarUsuarioService from "../services/usuario/deletarUsuario.service";
 export default class UsuarioController {
   static async store(request: Request, response: Response) {
     const { nome, cpf, email, telefone, senha, pendencia } = request.body;
+    const nodemailer = require("nodemailer");
 
     const criarUsuario = new CriarUsuarioService();
 
@@ -20,8 +21,35 @@ export default class UsuarioController {
       pendencia,
     });
 
+    var transport = nodemailer.createTransport({
+      host: "smtp.mailtrap.io",
+      port: 2525,
+      auth: {
+        user: "2b05ea152a00d5",
+        pass: "1c50014392317c",
+      },
+    });
+
+    let message = {
+      from: "noreplay@rtng.com.br",
+      to: `${email}`,
+      subject: "Cadastro realizado com sucesso",
+      text: "Sua nova melhor locadora agora a um clique",
+      html: "<p>Olá. Obrigado por ser cadastrar na Returning</p>",
+    };
+
+    transport.sendMail(message, function (err: any) {
+      if (err) {
+        return response.status(400).json({
+          erro: true,
+          msg: "Erro durante o envio de e-mail",
+        });
+      }
+    });
+
     return response.status(201).json(usuario);
   }
+
   static async index(request: Request, response: Response) {
     const usuariosRepositorio = AppDataSource.getRepository(Usuario);
 
@@ -29,11 +57,14 @@ export default class UsuarioController {
 
     return response.status(200).json(usuarios);
   }
+
   static async update(request: Request, response: Response) {
     const { id } = request.params;
     const { nome, cpf, email, telefone, senha, pendencia } = request.body;
 
-    const usuario = await AtualizarUsuarioService.execute({
+    const novoUsuario = new AtualizarUsuarioService();
+
+    const usuario = await novoUsuario.execute({
       id,
       nome,
       cpf,
@@ -50,7 +81,9 @@ export default class UsuarioController {
   static async delete(request: Request, response: Response) {
     const { id } = request.params;
 
-    const usuario = await DeletarUsuarioService.execute(id);
+    const deletarUsuario = new DeletarUsuarioService();
+
+    const usuario = await deletarUsuario.execute(id);
 
     return response.status(200).json({ message: "User deleted" });
   }

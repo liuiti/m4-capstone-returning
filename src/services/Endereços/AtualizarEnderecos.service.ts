@@ -4,7 +4,7 @@ import AppError from "../../errors/AppError";
 import { IEnderecoAtualizar } from "../../interfaces/Endereco";
 
 export default class AtualizarEnderecosService {
-  static async execute({
+   async execute({
     id,
     cidade,
     estado,

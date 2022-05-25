@@ -4,7 +4,7 @@ import AppError from "../../errors/AppError";
 import { IJogosUpdate } from "../../interfaces/Jogos";
 
 export default class AtualizarJogosService {
-  public static async execute({
+    async execute({
     nome,
     valor,
     id,

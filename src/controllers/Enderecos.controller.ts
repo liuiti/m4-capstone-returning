@@ -36,8 +36,10 @@ export default class EnderecoController {
     const { id } = request.params;
     const { cidade, estado, cep, rua, numero, bairro, complemento } =
       request.body;
+    
+    const novoEndereco = new AtualizarEnderecosService();
 
-    const endereco = await AtualizarEnderecosService.execute({
+    const endereco = await novoEndereco.execute({
       id,
       cidade,
       estado,
@@ -56,7 +58,9 @@ export default class EnderecoController {
   static async delete(request: Request, response: Response) {
     const { id } = request.params;
 
-    const endereco = await DeletarEnderecosService.execute(id);
+    const novoEndereco = new DeletarEnderecosService();
+
+    const endereco = await novoEndereco.execute(id);
 
     return response.status(200).json({ message: "Address deleted" });
   }

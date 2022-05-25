@@ -3,7 +3,7 @@ import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
 
 export default class UnicoConsoleService {
-  static async execute(id: string): Promise<Console> {
+   async execute(id: string): Promise<Console> {
     const consoleRepositorio = AppDataSource.getRepository(Console);
     const console = await consoleRepositorio.findOne({ where: { id } });
 

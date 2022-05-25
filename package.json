@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@types/dotenv": "^8.2.0",
+    "@types/nodemailer": "^6.4.4",
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "dotenv": "^16.0.1",
@@ -36,6 +37,7 @@
     "express-async-errors": "^3.1.1",
     "express-yup-middleware": "^1.2.3",
     "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.7.5",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.6",

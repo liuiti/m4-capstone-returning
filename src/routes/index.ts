@@ -6,6 +6,7 @@ import jogoRouter from "./jogos.routes";
 import usuarioRouter from "./usuario.routes";
 import loginRouter from "./login.routes";
 import alugarJogoRouter from "./alugarJogo.routes";
+import finalizarPedidoRouter from "./finalizarPedido.routes";
 
 
 
@@ -18,5 +19,6 @@ routes.use("/enderecos", enderecoRouter);
 routes.use("/alugar/consoles", alugarConsoleRouter);
 routes.use("/login", loginRouter);
 routes.use("/alugar/jogos", alugarJogoRouter);
+routes.use("/finalizar/:id", finalizarPedidoRouter);
 
 export default routes;

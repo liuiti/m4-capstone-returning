@@ -35,6 +35,8 @@ export default class CriarAluguelJogo {
       throw new AppError("Lista invalida com esse id");
     }
 
+    const { usuarioCarrinho }: any = jwt.decode(token);
+
     const pedido = pedidoRepositorio.create({ carrinhoId: usuarioCarrinho });
 
     await pedidoRepositorio.save(pedido);

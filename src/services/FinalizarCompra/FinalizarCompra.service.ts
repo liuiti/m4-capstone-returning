@@ -11,6 +11,9 @@ import jwt from "jsonwebtoken";
 
 export default class FinalizarCompraService {
   static async execute(id: string, token: string) {
+
+    let precoDoPedido = 0
+
     const carrinhoRepositorio = AppDataSource.getRepository(Carrinho);
 
     const usuarioRepositorio = AppDataSource.getRepository(Usuario);
@@ -65,8 +68,10 @@ export default class FinalizarCompraService {
       if (!consoles) {
         throw new AppError("Consoles não encontrado");
       }
+      precoDoPedido += consoles.valor
       consoles.disponivel = false;
       await consoleRepositorio.save(consoles);
+      
     });
 
     jogoPedidos.forEach(async (item) => {
@@ -77,11 +82,13 @@ export default class FinalizarCompraService {
         throw new AppError("Jogos não encontrado");
       }
       jogos.disponivel = false;
+      precoDoPedido += jogos.valor
       await jogoRepositorio.save(jogos);
     });
 
     //alterar o pedencnia = true do usuario após tudo isso
-
+    
+    token = token.split(' ')[1]
     const {  sub }: any = jwt.decode(token);
 
     let usuario = await usuarioRepositorio.findOne({
@@ -92,7 +99,9 @@ export default class FinalizarCompraService {
       throw new AppError("Usuário com esse id não existe");
     }
 
-    usuario.pendencia = true
+    usuario.pendencia = true;
+    
+    console.log(usuario)
+    return { usuario, valor_do_pedido: Number(precoDoPedido) };
   }
-  
 }

@@ -1,25 +1,25 @@
 import { In } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
-import { Console } from "../../models/Consoles";
+import { Jogo } from "../../models/Jogos";
 import jwt from "jsonwebtoken";
 import { Usuario } from "../../models/Usuarios";
-import { DevolverConsole } from "../../interfaces/Devolver";
+import { DevolverJogo } from "../../interfaces/Devolver";
 
-export default class CriarDevolucaoConsole {
-  static async execute({ console_id, token }: DevolverConsole) {
-    const consoleRepositorio = AppDataSource.getRepository(Console);
+export default class CriarDevolucaoJogo {
+  static async execute({ jogo_id, token }: DevolverJogo) {
+    const jogoRepositorio = AppDataSource.getRepository(Jogo);
     const usuarioRepositorio = AppDataSource.getRepository(Usuario);
 
-    const consoles = await consoleRepositorio.findBy({
-      id: In(console_id),
+    const jogos = await jogoRepositorio.findBy({
+      id: In(jogo_id),
     });
 
-    if (consoles.length !== console_id.length) {
+    if (jogos.length !== jogo_id.length) {
       throw new AppError("Lista invalida com esse id");
     }
 
-    consoles.forEach((item) => {
+    jogos.forEach((item) => {
       item.disponivel = true;
     });
 
@@ -44,8 +44,8 @@ export default class CriarDevolucaoConsole {
 
     await usuarioRepositorio.save(usuario);
 
-    await consoleRepositorio.save(consoles);
+    await jogoRepositorio.save(jogos);
 
-    return consoles;
+    return jogos;
   }
 }

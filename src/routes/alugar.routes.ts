@@ -12,5 +12,6 @@ alugarRouter.get("/consoles", AlugarConsoleController.index);
 /* ROTAS DE JOGOS */
 
 alugarRouter.post("/jogos", AlugarJogoController.store);
+alugarRouter.get("/jogos", AlugarJogoController.index);
 
 export default alugarRouter;

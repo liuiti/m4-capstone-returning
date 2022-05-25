@@ -6,15 +6,16 @@ import jogoRouter from "./jogos.routes";
 import usuarioRouter from "./usuario.routes";
 import loginRouter from "./login.routes";
 import devolverRouter from "./devolver.routes";
+import ensureAuth from "../middlewares/ensureAuth";
 
 const routes = Router();
 
-routes.use("/consoles", consoleRouter);
-routes.use("/jogos", jogoRouter);
+routes.use("/consoles", ensureAuth, consoleRouter);
+routes.use("/jogos", ensureAuth, jogoRouter);
 routes.use("/usuarios", usuarioRouter);
 routes.use("/enderecos", enderecoRouter);
-routes.use("/alugar", alugarRouter);
+routes.use("/alugar", ensureAuth, alugarRouter);
 routes.use("/login", loginRouter);
-routes.use("/devolver", devolverRouter);
+routes.use("/devolver", ensureAuth, devolverRouter);
 
 export default routes;

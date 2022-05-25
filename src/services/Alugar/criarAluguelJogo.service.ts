@@ -5,14 +5,10 @@ import AppError from "../../errors/AppError";
 import { Pedido } from "../../models/Pedidos";
 import { Jogo_Pedido } from "../../models/Jogos_Pedidos";
 import jwt from "jsonwebtoken";
-
-interface Request {
-  jogo_id: string[];
-  token: string | undefined;
-}
+import { AluguelJogo } from "../../interfaces/Aluguel";
 
 export default class CriarAluguelJogo {
-  static async execute({ jogo_id, token }: Request): Promise<Pedido> {
+  static async execute({ jogo_id, token }: AluguelJogo): Promise<Pedido> {
     const pedidoRepositorio = AppDataSource.getRepository(Pedido);
 
     const jogoPedidoRepositorio = AppDataSource.getRepository(Jogo_Pedido);
@@ -39,9 +35,8 @@ export default class CriarAluguelJogo {
 
     jogo_id.forEach(async (jogoId) => {
       const jogoPedido = jogoPedidoRepositorio.create({
-     
-          pedido: pedido,
-          jogoId
+        pedido: pedido,
+        jogoId,
       });
 
       await jogoPedidoRepositorio.save(jogoPedido);

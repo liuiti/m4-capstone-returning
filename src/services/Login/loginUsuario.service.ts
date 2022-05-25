@@ -4,16 +4,7 @@ import { sign } from "jsonwebtoken";
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
 import { Carrinho } from "../../models/Carrinhos";
-
-interface Request {
-  email: string;
-  senha: string;
-}
-
-interface Response {
-  token: string;
-  usuario: Usuario;
-}
+import { Request, Response } from "../../interfaces/Login";
 
 export class AutenticacaoService {
   static async execute({ email, senha }: Request): Promise<Response> {

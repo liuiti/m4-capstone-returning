@@ -5,14 +5,10 @@ import { Pedido } from "../../models/Pedidos";
 import { Console_Pedido } from "../../models/Consoles_Pedidos";
 import { Console } from "../../models/Consoles";
 import jwt from "jsonwebtoken";
-
-interface Request {
-  console_id: string[];
-  token: string | undefined;
-}
+import { AluguelConsole } from "../../interfaces/Aluguel";
 
 export default class CriarAluguelConsole {
-  static async execute({ console_id, token }: Request): Promise<Pedido> {
+  static async execute({ console_id, token }: AluguelConsole): Promise<Pedido> {
     const pedidoRepositorio = AppDataSource.getRepository(Pedido);
 
     const consolePedidoRepositorio =

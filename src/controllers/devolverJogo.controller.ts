@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
-import CriarDevolucaoConsole from "../services/Devolver/devolverConsole.service";
+import CriarDevolucaoJogo from "../services/Devolver/devolverJogo.service";
 
-export default class DevolverConsoleController {
+export default class DevolverJogoController {
   static async store(request: Request, response: Response) {
-    const { console_id } = request.body;
+    const { jogo_id } = request.body;
     let token = request.headers.authorization;
 
     token = token?.split(" ")[1];
 
-    const devolucao = await CriarDevolucaoConsole.execute({
-      console_id,
+    const devolucao = await CriarDevolucaoJogo.execute({
+      jogo_id,
       token,
     });
     return response.status(200).json(devolucao);

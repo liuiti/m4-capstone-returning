@@ -33,6 +33,9 @@ export class Endereco {
   @Column({ type: "varchar", length: 100, nullable: true })
   complemento: string;
 
+  @Column()
+  usuarioId: string
+
   @OneToOne(() => Usuario, (usuario) => usuario.id, {
     eager: true,
   })

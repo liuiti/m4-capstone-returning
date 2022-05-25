@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { AppDataSource } from "../data-source";
 import { Usuario } from "../models/Usuarios";
 import AppError from "../errors/AppError";
+import { string } from "yup";
 
 export default async function usuarioInfoExiste(
   request: Request,

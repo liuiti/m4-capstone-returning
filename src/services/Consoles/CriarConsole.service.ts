@@ -3,7 +3,7 @@ import IConsoleCriar from "../../interfaces/Console";
 import { AppDataSource } from "../../data-source";
 
 export default class CriarConsoleService {
-  async execute({
+  static async execute({
     nome,
     valor,
     dono,

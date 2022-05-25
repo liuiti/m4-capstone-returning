@@ -5,14 +5,13 @@ import AtualizarConsoleService from "../services/Consoles/AtualizarConsole.servi
 import CriarConsolesService from "../services/Consoles/CriarConsole.service";
 import DeletarConsoleService from "../services/Consoles/DeletarConsole.service";
 import UnicoConsoleService from "../services/Consoles/UnicoConsole.service";
+import IConsoleCriar from "../interfaces/Console"
 
 export default class ConsoleController {
   static async store(request: Request, response: Response) {
     const { nome, valor, dono, estado, observacao, disponivel } = request.body;
 
-    const criarConsole = new CriarConsolesService();
-
-    const console = await criarConsole.execute({
+    const console = await CriarConsolesService.execute({
       nome,
       valor,
       dono,
@@ -25,10 +24,11 @@ export default class ConsoleController {
   }
 
   static async index(request: Request, response: Response) {
-    const consoleRepositorio = AppDataSource.getRepository(Console);
+    const jogoRepositorio = AppDataSource.getRepository(Console);
 
-    const listarConsoles = await consoleRepositorio.find();
-    return response.status(200).json(listarConsoles);
+    const jogos = await jogoRepositorio.find();
+
+    return response.status(200).json(jogos);
   }
 
   static async show(request: Request, response: Response) {
@@ -59,9 +59,11 @@ export default class ConsoleController {
   }
 
   static async delete(request: Request, response: Response) {
-    const { id } = request.params;
+    const { id } = request.body;
     const deletarConsole = await DeletarConsoleService.execute(id);
 
-    return response.status(200).json({ message: "Console deleted" });
+    return response
+      .status(200)
+      .json({ message: "Console deletado" });
   }
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # m4-capstone-returning
 
 
@@ -117,3 +118,5 @@ tabela pedido
 confirmar relação daquela bolinha que deixaram com a tabela pedidos_consoles. esta com dois 
 carrinho_id
 
+=======
+>>>>>>> 82b69cd0941cb7ec4705cc231e4dd81eafa23bbd

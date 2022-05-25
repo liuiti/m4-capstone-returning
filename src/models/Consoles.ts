@@ -8,7 +8,7 @@ export class Console {
   @Column({ type: "varchar", length: 128 })
   nome: string;
 
-  @Column({ type: "integer" })
+  @Column({ type: "decimal", precision: 8, scale: 2 })
   valor: number;
 
   @Column({ type: "varchar", length: 128 })

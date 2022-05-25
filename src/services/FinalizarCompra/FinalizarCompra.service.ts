@@ -38,7 +38,6 @@ export default class FinalizarCompraService {
     const pedidos = await pedidoRepositorio.findBy({
       carrinhoId: carrinho.id,
     });
-    //verificar o que tem id igual ao do nosso carrinho
 
     if (!pedidos) {
       throw new AppError("Pedido não encontrado");
@@ -52,10 +51,8 @@ export default class FinalizarCompraService {
       throw new AppError("Usuário com esse id não existe");
     }
 
-
-
-    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
     pedidos.forEach(async (pedido) => {
+      
       const consolePedidos = await consolePedidosRepositorio.findBy({
         pedidoId: pedido.id,
       });
@@ -69,13 +66,17 @@ export default class FinalizarCompraService {
         throw new AppError("Consoles pedidos não encontrados");
       }
       consolePedidos.forEach(async (item) => {
+        
         const consoles = await consoleRepositorio.findOne({
           where: { id: item.consoleId },
         });
+
+       
+
         if (!consoles) {
           throw new AppError("Consoles não encontrado");
         }
-        //  precoDoPedido += consoles.valor
+       
         consoles.disponivel = false;
         await consoleRepositorio.save(consoles);
       });
@@ -84,6 +85,8 @@ export default class FinalizarCompraService {
         const jogos = await jogoRepositorio.findOne({
           where: { id: item.jogoId },
         });
+
+       
         if (!jogos) {
           throw new AppError("Jogos não encontrado");
         }
@@ -96,7 +99,8 @@ export default class FinalizarCompraService {
     });
     
     usuario.pendencia = true;
-    return usuario
+    console.log(precoDoPedido);
+    return {usuario, valor: precoDoPedido}
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
     
   }

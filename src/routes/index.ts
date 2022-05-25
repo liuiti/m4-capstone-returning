@@ -9,7 +9,6 @@ import alugarJogoRouter from "./alugarJogo.routes";
 import finalizarPedidoRouter from "./finalizarPedido.routes";
 import devolverRouter from "./devolverPedido.routes";
 
-
 const routes = Router();
 
 routes.use("/consoles", consoleRouter);
@@ -21,6 +20,5 @@ routes.use("/login", loginRouter);
 routes.use("/alugar/jogos", alugarJogoRouter);
 routes.use("/finalizar/:id", finalizarPedidoRouter);
 routes.use("/devolver/:id", devolverRouter);
-
 
 export default routes;

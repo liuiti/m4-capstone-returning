@@ -1,4 +1,4 @@
-import { Usuario } from './../../models/Usuarios';
+import { Usuario } from "./../../models/Usuarios";
 import { Jogo } from "./../../models/Jogos";
 import { In } from "typeorm";
 import { AppDataSource } from "../../data-source";
@@ -23,9 +23,6 @@ export default class CriarAluguelJogo {
     if (!token) {
       throw new AppError("Token não encontrado");
     }
-
-
-
 
     const jogos = await jogoRepositorio.findBy({
       id: In(jogo_id),

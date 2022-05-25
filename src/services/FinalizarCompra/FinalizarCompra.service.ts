@@ -8,7 +8,6 @@ import { Jogo_Pedido } from "../../models/Jogos_Pedidos";
 import { Jogo } from "../../models/Jogos";
 import { Console } from "../../models/Consoles";
 
-
 export default class FinalizarCompraService {
   static async execute(id: string, token: string) {
     let precoDoPedido = 0;
@@ -43,7 +42,6 @@ export default class FinalizarCompraService {
       throw new AppError("Pedido não encontrado");
     }
 
-
     let usuario = await usuarioRepositorio.findOne({
       where: { id },
     });
@@ -52,7 +50,6 @@ export default class FinalizarCompraService {
     }
 
     pedidos.forEach(async (pedido) => {
-      
       const consolePedidos = await consolePedidosRepositorio.findBy({
         pedidoId: pedido.id,
       });
@@ -66,17 +63,14 @@ export default class FinalizarCompraService {
         throw new AppError("Consoles pedidos não encontrados");
       }
       consolePedidos.forEach(async (item) => {
-        
         const consoles = await consoleRepositorio.findOne({
           where: { id: item.consoleId },
         });
 
-       
-
         if (!consoles) {
           throw new AppError("Consoles não encontrado");
         }
-       
+
         consoles.disponivel = false;
         await consoleRepositorio.save(consoles);
       });
@@ -86,7 +80,6 @@ export default class FinalizarCompraService {
           where: { id: item.jogoId },
         });
 
-       
         if (!jogos) {
           throw new AppError("Jogos não encontrado");
         }
@@ -94,14 +87,11 @@ export default class FinalizarCompraService {
         // precoDoPedido += jogos.valor
         await jogoRepositorio.save(jogos);
       });
-
-      
     });
-    
+
     usuario.pendencia = true;
     console.log(precoDoPedido);
-    return {usuario, valor: precoDoPedido}
+    return { usuario, valor: precoDoPedido };
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
-    
   }
 }

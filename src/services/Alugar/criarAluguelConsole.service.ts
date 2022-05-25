@@ -46,6 +46,7 @@ export default class CriarAluguelConsole {
 
       await consolePedidoRepositorio.save(consolePedido);
     });
+
     return pedido;
   }
 }

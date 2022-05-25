@@ -7,12 +7,11 @@ import { Console_Pedido } from "../../models/Consoles_Pedidos";
 import { Jogo_Pedido } from "../../models/Jogos_Pedidos";
 import { Jogo } from "../../models/Jogos";
 import { Console } from "../../models/Consoles";
-import jwt from "jsonwebtoken";
+
 
 export default class FinalizarCompraService {
   static async execute(id: string, token: string) {
-
-    let precoDoPedido = 0
+    let precoDoPedido = 0;
 
     const carrinhoRepositorio = AppDataSource.getRepository(Carrinho);
 
@@ -36,72 +35,69 @@ export default class FinalizarCompraService {
     if (!carrinho) {
       throw new AppError("Carrinho não encontrado");
     }
-    const pedidos = await pedidoRepositorio.findOne({
-      where: { carrinhoId: carrinho.id },
+    const pedidos = await pedidoRepositorio.findBy({
+      carrinhoId: carrinho.id,
     });
+    //verificar o que tem id igual ao do nosso carrinho
 
     if (!pedidos) {
       throw new AppError("Pedido não encontrado");
     }
 
-    const consolePedidos = await consolePedidosRepositorio.findBy({
-      pedidoId: pedidos.id,
-    });
-
-    const jogoPedidos = await jogoPedidoRepositorio.findBy({
-      pedidoId: pedidos.id,
-    });
-
-    if (!jogoPedidos) {
-      throw new AppError("Jogos pedidos não encontrado");
-    }
-
-    if (!consolePedidos) {
-      throw new AppError("Consoles pedidos não encontrados");
-    }
-
-    consolePedidos.forEach(async (item) => {
-      const consoles = await consoleRepositorio.findOne({
-        where: { id: item.consoleId },
-      });
-
-      if (!consoles) {
-        throw new AppError("Consoles não encontrado");
-      }
-      precoDoPedido += consoles.valor
-      consoles.disponivel = false;
-      await consoleRepositorio.save(consoles);
-      
-    });
-
-    jogoPedidos.forEach(async (item) => {
-      const jogos = await jogoRepositorio.findOne({
-        where: { id: item.jogoId },
-      });
-      if (!jogos) {
-        throw new AppError("Jogos não encontrado");
-      }
-      jogos.disponivel = false;
-      precoDoPedido += jogos.valor
-      await jogoRepositorio.save(jogos);
-    });
-
-    //alterar o pedencnia = true do usuario após tudo isso
-    
-    token = token.split(' ')[1]
-    const {  sub }: any = jwt.decode(token);
 
     let usuario = await usuarioRepositorio.findOne({
-      where: { id: sub },
+      where: { id },
     });
-
     if (!usuario) {
       throw new AppError("Usuário com esse id não existe");
     }
 
-    usuario.pendencia = true;
+
+
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+    pedidos.forEach(async (pedido) => {
+      const consolePedidos = await consolePedidosRepositorio.findBy({
+        pedidoId: pedido.id,
+      });
+      const jogoPedidos = await jogoPedidoRepositorio.findBy({
+        pedidoId: pedido.id,
+      });
+      if (!jogoPedidos) {
+        throw new AppError("Jogos pedidos não encontrado");
+      }
+      if (!consolePedidos) {
+        throw new AppError("Consoles pedidos não encontrados");
+      }
+      consolePedidos.forEach(async (item) => {
+        const consoles = await consoleRepositorio.findOne({
+          where: { id: item.consoleId },
+        });
+        if (!consoles) {
+          throw new AppError("Consoles não encontrado");
+        }
+        //  precoDoPedido += consoles.valor
+        consoles.disponivel = false;
+        await consoleRepositorio.save(consoles);
+      });
+
+      jogoPedidos.forEach(async (item) => {
+        const jogos = await jogoRepositorio.findOne({
+          where: { id: item.jogoId },
+        });
+        if (!jogos) {
+          throw new AppError("Jogos não encontrado");
+        }
+        jogos.disponivel = false;
+        // precoDoPedido += jogos.valor
+        await jogoRepositorio.save(jogos);
+      });
+
+      
+    });
     
-    console.log(usuario)
-    return { usuario, valor_do_pedido: Number(precoDoPedido) };
+    usuario.pendencia = true;
+    return usuario
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
+    
   }
 }

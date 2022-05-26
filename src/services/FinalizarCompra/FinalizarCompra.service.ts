@@ -100,13 +100,16 @@ export default class FinalizarCompraService {
 
         total += consoles.reduce((valorAntigo, valorAtual) => {
           return Number(valorAntigo) + Number(valorAtual.valor);
-        }, 0);
+        }, carrinho.total);
+        total.toFixed(2);
         carrinho.total = total;
         await carrinhoRepositorio.save(carrinho);
       });
     });
 
     console.log(carrinho.total);
+    await carrinhoRepositorio.save(carrinho);
+
     return { usuario, carrinho };
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
   }

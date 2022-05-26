@@ -22,9 +22,9 @@ export default function ensureAuth(
 
     const { sub } = decoded;
 
-    request.body = {
-      id: sub as string,
-    };
+    // request.body = {
+    //   id: sub as string,
+    // };
 
     return next();
   } catch (err) {

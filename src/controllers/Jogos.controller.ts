@@ -5,12 +5,14 @@ import AtualizarJogoService from "../services/Jogos/AtualizarJogo.service";
 import BuscarJogoService from "../services/Jogos/BuscarJogo.service";
 import CriarJogosService from "../services/Jogos/CriarJogos.service";
 import DeletarJogoService from "../services/Jogos/DeletarJogo.service";
-
+ 
 export default class JogosController {
   static async store(request: Request, response: Response) {
     const { nome, valor, descricao_jogo, dono, estado, disponivel } =
       request.body;
 
+      console.log(request.body)
+    
     const jogo = await CriarJogosService.execute({
       nome,
       valor,
@@ -64,3 +66,4 @@ export default class JogosController {
       .json({ message: "Jogo deletado", jogoDeletado: deletarJogo });
   }
 }
+

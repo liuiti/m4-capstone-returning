@@ -10,7 +10,6 @@ export default class JogosController {
   static async store(request: Request, response: Response) {
     const { nome, valor, descricao_jogo, dono, estado, disponivel } =
       request.body;
-
     const novoJogo = new CriarJogosService();
 
     const jogo = await novoJogo.execute({

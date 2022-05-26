@@ -1,12 +1,18 @@
 import { Router } from "express";
 import UsuarioController from "../controllers/Usuario.controller";
+import ensureAuth from "../middlewares/ensureAuth";
 import usuarioInfoExiste from "../middlewares/usuarioInfoExiste.middlewares";
 
 const usuarioRouter = Router();
 
 usuarioRouter.post("", UsuarioController.store);
-usuarioRouter.get("", UsuarioController.index);
-usuarioRouter.patch("/:id", usuarioInfoExiste, UsuarioController.update);
-usuarioRouter.delete("/:id", UsuarioController.delete);
+usuarioRouter.get("", ensureAuth, UsuarioController.index);
+usuarioRouter.patch(
+  "/:id",
+  ensureAuth,
+  usuarioInfoExiste,
+  UsuarioController.update
+);
+usuarioRouter.delete("/:id", ensureAuth, UsuarioController.delete);
 
 export default usuarioRouter;

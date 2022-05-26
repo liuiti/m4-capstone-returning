@@ -7,6 +7,7 @@ import usuarioRouter from "./usuario.routes";
 import loginRouter from "./login.routes";
 import devolverRouter from "./devolver.routes";
 import ensureAuth from "../middlewares/ensureAuth";
+import finalizarPedidoRouter from "./finalizarPedido.routes";
 
 const routes = Router();
 
@@ -17,5 +18,6 @@ routes.use("/enderecos", enderecoRouter);
 routes.use("/alugar", ensureAuth, alugarRouter);
 routes.use("/login", loginRouter);
 routes.use("/devolver", ensureAuth, devolverRouter);
+routes.use("/finalizar", ensureAuth, finalizarPedidoRouter);
 
 export default routes;

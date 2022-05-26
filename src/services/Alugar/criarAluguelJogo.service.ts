@@ -30,6 +30,12 @@ export default class CriarAluguelJogo {
 
     const { usuarioCarrinho }: any = jwt.decode(token);
 
+    jogos.forEach((jogo) => {
+      if (jogo.disponivel === false) {
+        throw new AppError(`Existem produtos indisponíveis. Reveja seu pedido`);
+      }
+    }); 
+
     const pedido = pedidoRepositorio.create({ carrinhoId: usuarioCarrinho });
 
     await pedidoRepositorio.save(pedido);

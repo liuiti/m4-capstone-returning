@@ -23,5 +23,5 @@ export class Carrinho {
     eager: true,
   })
   @JoinColumn()
-  usuario: Usuario[];
+  usuario: Usuario;
 }

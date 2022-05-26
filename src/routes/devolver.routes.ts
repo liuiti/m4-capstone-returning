@@ -1,6 +1,6 @@
 import { Router } from "express";
-import DevolverConsoleController from "../controllers/devolverConsole.controller";
-import DevolverJogoController from "../controllers/devolverJogo.controller";
+import DevolverConsoleController from "../controllers/DevolverConsole.controller";
+import DevolverJogoController from "../controllers/DevolverJogo.controller";
 
 const devolverRouter = Router();
 

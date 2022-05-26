@@ -10,12 +10,12 @@ import ensureAuth from "../middlewares/ensureAuth";
 
 const routes = Router();
 
-routes.use("/consoles", ensureAuth, consoleRouter);
-routes.use("/jogos", ensureAuth, jogoRouter);
+routes.use("/consoles", /* ensureAuth, */ consoleRouter);
+routes.use("/jogos", /* ensureAuth, */ jogoRouter);
 routes.use("/usuarios", usuarioRouter);
 routes.use("/enderecos", enderecoRouter);
-routes.use("/alugar", ensureAuth, alugarRouter);
+routes.use("/alugar", /* ensureAuth, */ alugarRouter);
 routes.use("/login", loginRouter);
-routes.use("/devolver", ensureAuth, devolverRouter);
+routes.use("/devolver", /*  ensureAuth,  */ devolverRouter);
 
 export default routes;

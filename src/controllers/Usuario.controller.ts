@@ -8,11 +8,9 @@ import DeletarUsuarioService from "../services/usuario/deletarUsuario.service";
 export default class UsuarioController {
   static async store(request: Request, response: Response) {
     const { nome, cpf, email, telefone, senha, pendencia } = request.body;
-    const nodemailer = require("nodemailer");
+    /*   const nodemailer = require("nodemailer"); */
 
-    const criarUsuario = new CriarUsuarioService();
-
-    const usuario = await criarUsuario.execute({
+    const usuario = await CriarUsuarioService.execute({
       nome,
       cpf,
       email,
@@ -20,7 +18,7 @@ export default class UsuarioController {
       senha,
       pendencia,
     });
-
+    /* 
     var transport = nodemailer.createTransport({
       host: "smtp.mailtrap.io",
       port: 2525,
@@ -45,7 +43,7 @@ export default class UsuarioController {
           msg: "Erro durante o envio de e-mail",
         });
       }
-    });
+    }); */
 
     return response.status(201).json(usuario);
   }
@@ -62,9 +60,7 @@ export default class UsuarioController {
     const { id } = request.params;
     const { nome, cpf, email, telefone, senha, pendencia } = request.body;
 
-    const novoUsuario = new AtualizarUsuarioService();
-
-    const usuario = await novoUsuario.execute({
+    const usuario = await AtualizarUsuarioService.execute({
       id,
       nome,
       cpf,
@@ -81,9 +77,7 @@ export default class UsuarioController {
   static async delete(request: Request, response: Response) {
     const { id } = request.params;
 
-    const deletarUsuario = new DeletarUsuarioService();
-
-    const usuario = await deletarUsuario.execute(id);
+    const usuario = await DeletarUsuarioService.execute(id);
 
     return response.status(200).json({ message: "User deleted" });
   }

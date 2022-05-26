@@ -4,7 +4,7 @@ import { IConsoleAtualizar } from "../../interfaces/Console";
 import AppError from "../../errors/AppError";
 
 export default class AtualizarConsoleService {
-   async execute({
+  static async execute({
     id,
     nome,
     valor,

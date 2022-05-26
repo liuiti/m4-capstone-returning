@@ -24,5 +24,5 @@ export interface IUsuarioCriarTwo {
   telefone: number;
   senha: string;
   pendencia: boolean;
-  carrinho: Array<any>[]
+  carrinho: Array<any>[];
 }

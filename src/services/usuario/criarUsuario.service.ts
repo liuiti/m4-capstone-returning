@@ -6,7 +6,7 @@ import { IUsuarioCriar } from "../../interfaces/Usuario";
 import { Carrinho } from "../../models/Carrinhos";
 
 export default class CriarUsuarioService {
-  async execute({
+  static async execute({
     nome,
     cpf,
     email,

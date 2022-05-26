@@ -30,6 +30,15 @@ export default class CriarAluguelConsole {
       throw new AppError("Lista invalida com esse id");
     }
 
+    consoles.forEach(console => {
+      if (console.disponivel === false) {
+      throw new AppError(`Existem produtos indisponíveis. Reveja seu pedido`);
+      
+    }
+  })    
+
+
+
     const pedido = pedidoRepositorio.create({ carrinhoId: usuarioCarrinho });
 
     await pedidoRepositorio.save(pedido);

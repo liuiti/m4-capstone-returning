@@ -3,6 +3,6 @@ import FinalizarCompra from "../controllers/FinalizarCompra.controller";
 
 const finalizarPedidoRouter = Router()
 
-finalizarPedidoRouter.post("", FinalizarCompra.store);
+finalizarPedidoRouter.post("/:id", FinalizarCompra.store);
 
 export default finalizarPedidoRouter;

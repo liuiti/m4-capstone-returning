@@ -4,7 +4,7 @@ import { IJogosCriar } from "../../interfaces/Jogos";
 import AppError from "../../errors/AppError";
 
 export default class CriarJogosService {
-   async execute({
+  static async execute({
     nome,
     valor,
     descricao_jogo,
@@ -13,10 +13,6 @@ export default class CriarJogosService {
     disponivel,
   }: IJogosCriar): Promise<Jogo> {
     const jogoRepositorio = AppDataSource.getRepository(Jogo);
-
-    if (!nome || !valor || !descricao_jogo || !dono || !estado || !disponivel) {
-      throw new AppError("All fields required");
-    }
 
     const jogo = jogoRepositorio.create({
       nome,

@@ -4,7 +4,7 @@ import { AppDataSource } from "../../data-source";
 import { IEnderecosCriar } from "../../interfaces/Endereco";
 
 export default class CriarEnderecosService {
-  async execute({
+  static async execute({
     cidade,
     estado,
     cep,

@@ -4,7 +4,7 @@ import AppError from "../../errors/AppError";
 import { DeleteResult } from "typeorm";
 
 export default class DeletarEnderecosService {
-   async execute(id: string): Promise<DeleteResult> {
+  static async execute(id: string): Promise<DeleteResult> {
     const enderecoRepositorio = AppDataSource.getRepository(Endereco);
 
     const enderecoUsuario = await enderecoRepositorio.findOne({

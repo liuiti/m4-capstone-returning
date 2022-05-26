@@ -4,7 +4,7 @@ import AppError from "../../errors/AppError";
 import { DeleteResult } from "typeorm";
 
 export default class DeletarConsoleService {
-   async execute(id: string): Promise<DeleteResult> {
+  static async execute(id: string): Promise<DeleteResult> {
     const consoleRepositorio = AppDataSource.getRepository(Console);
 
     const console = await consoleRepositorio.findOne({ where: { id } });

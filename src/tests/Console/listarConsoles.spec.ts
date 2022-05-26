@@ -1,50 +1,27 @@
-import { DataSource } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import request from "supertest";
+import { DataSource } from "typeorm";
 import app from "../../app";
+import request from "supertest";
 
-describe("Testando a rota de usuários", () => {
-  let connection: DataSource;
+describe("Criar um novo console", () => {
+  let conexaoDb: any = DataSource;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
-      .then((res) => (connection = res))
+      .then((res) => (conexaoDb = res))
       .catch((err) => {
-        console.error("Erro durante a inicialização do Data Source", err);
+        console.error("Erro durante a inicialização do data-source");
       });
   });
 
   afterAll(async () => {
-    await connection.destroy();
+    await conexaoDb.destroy();
   });
 
-  let expectedProps = [
-    "id",
-    "cpf",
-    "email",
-    "nome",
-    "pendencia",
-    "senha",
-    "telefone",
-  ];
-  test("Deverá retornar um array JSON", async () => {
-    return request(app)
-      .get("/usuarios")
-      .expect(200)
-      .then((res) => {
-        expect(res.body).toBeInstanceOf(Array);
-      });
-  });
+  test("Deverá ser capaz de listar os consoles registrados", async () => {
+    const response = await request(app).get("/console").send();
 
-  test("Deverá retornar objetos com as propriedades corretas", async () => {
-    return request(app)
-      .get("/usuarios")
-      .expect(200)
-      .then((res) => {
-        let sampleKeys = Object.keys(res.body[0]);
-        expectedProps.forEach((key) => {
-          expect(sampleKeys.includes(key)).toBe(true);
-        });
-      });
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("map");
   });
 });

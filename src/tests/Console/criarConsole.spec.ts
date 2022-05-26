@@ -1,16 +1,15 @@
 import { AppDataSource } from "../../data-source";
 import { DataSource } from "typeorm";
-import app from "../../app";
-import request from "supertest";
+import CriarConsoleService from "../../services/Consoles/CriarConsole.service";
 
-describe("Deve ser capaz de criar um novo console", () => {
+describe("Criar um novo console", () => {
   let conexaoDb: any = DataSource;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
       .then((res) => (conexaoDb = res))
       .catch((err) => {
-        console.error("Error during data source initialization");
+        console.error("Erro durante a inicialização do data-source");
       });
   });
 
@@ -18,27 +17,17 @@ describe("Deve ser capaz de criar um novo console", () => {
     await conexaoDb.destroy();
   });
 
-  test("Deve ser capaz de inserir um novo console no database", async () => {
-    const nome = "Fulano";
-    const valor = 25;
-    const dono = "João";
-    const estado = "Excelente";
-    const observacao = "Quero mais";
-    const disponivel = true;
+  test("Deverá ser capaz de inserir um novo console", async () => {
+    const console = await CriarConsoleService.execute({
+      nome: "Fulano",
+      valor: 25,
+      dono: "João",
+      estado: "Excelente",
+      observacao: "Quero mais",
+      disponivel: true,
+    });
 
-    const novoConsole = { nome, valor, dono, estado, observacao, disponivel };
-    const response = await request(app).post("/consoles").send(novoConsole);
-
-    expect(response.status).toBe(201);
-    expect(response.body).toEqual(
-      expect.objectContaining({
-        nome,
-        valor,
-        dono,
-        estado,
-        observacao,
-        disponivel,
-      })
-    );
+    expect(console).toBeTruthy();
+    expect(console).toHaveProperty("id");
   });
 });

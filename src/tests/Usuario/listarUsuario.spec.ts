@@ -1,4 +1,4 @@
-import { DataSource } from "typeorm";
+/* import { DataSource } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import request from "supertest";
 import app from "../../app";
@@ -40,14 +40,14 @@ describe("Testando a rota de usuários", () => {
     "telefone",
   ];
 
-  /* test("Deverá retornar um array JSON", async () => {
+  test("Deverá retornar um array JSON", async () => {
     return request(app)
       .get("/usuarios")
       .expect(200)
       .then((res) => {
         expect(res.body).toBeInstanceOf(Array);
       });
-  }); */
+  }); 
 
   test("Deverá retornar objetos com as propriedades corretas", async () => {
     return request(app)
@@ -61,3 +61,4 @@ describe("Testando a rota de usuários", () => {
       });
   });
 });
+ */

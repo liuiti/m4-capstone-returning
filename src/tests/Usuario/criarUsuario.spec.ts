@@ -1,9 +1,8 @@
 import { DataSource } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import request from "supertest";
-import app from "../../app";
+import CriarUsuarioService from "../../services/usuario/criarUsuario.service";
 
-describe("Testando a rota de usuários", () => {
+describe("Criar usuários", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
@@ -19,28 +18,16 @@ describe("Testando a rota de usuários", () => {
   });
 
   test("Deverá criar um novo usuário", async () => {
-    const cpf = "123456";
-    const email = "novoemail@email.com";
-    const nome = "Nome atualizado";
-    const pendencia = false;
-    const senha = "123456";
-    const telefone = 37142833;
+    const usuario = await CriarUsuarioService.execute({
+      cpf: "123456",
+      email: "novoemail@email.com",
+      nome: "Nome atualizado",
+      pendencia: false,
+      senha: "123456",
+      telefone: 37142833,
+    });
 
-    const usuarioInfo = { cpf, email, nome, pendencia, senha, telefone };
-
-    const response = await request(app).post("/usuarios").send(usuarioInfo);
-
-    expect(response.statusCode).toEqual(201);
-    expect(response.body).toEqual(
-      expect.objectContaining({
-        id: response.body.id,
-        cpf,
-        email,
-        nome,
-        pendencia,
-        senha: response.body.senha,
-        telefone,
-      })
-    );
+    expect(usuario).toBeTruthy();
+    expect(usuario).toHaveProperty("id");
   });
 });

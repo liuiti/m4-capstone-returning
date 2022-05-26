@@ -12,18 +12,11 @@ const criarUsuariosSchema = {
             /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/,
             "O nome deve ter apenas letras"
           ),
-        email: yup.string().required("É necessário informar o email"),
-        senha: yup
+        email: yup
           .string()
-          .required("É necessária informar a senha")
-          .matches(
-            /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-            "Mínimo de 8 dígitos(Caractere Especial, Número, Maiúscula, Minúscula)"
-          ),
-        confirmacaoDeSenha: yup
-          .string()
-          .required("Confirmação obrigatória")
-          .oneOf([yup.ref("password"), null], "Senhas diferentes"),
+          .required("É necessário informar o email")
+          .email("O email deve ser válido"),
+        senha: yup.string().required("É necessária informar a senha").min(6),
 
         cpf: yup
           .string()

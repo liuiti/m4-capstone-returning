@@ -1,4 +1,4 @@
-import { DataSource } from "typeorm";
+/* import { DataSource } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import request from "supertest";
 import app from "../../app";
@@ -37,3 +37,4 @@ describe("Testando a rota de usuários", () => {
       });
   });
 });
+ */

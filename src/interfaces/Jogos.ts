@@ -16,3 +16,12 @@ export interface IJogosUpdate {
   disponivel: boolean;
   id: string;
 }
+export interface IJogoAtualizar {
+  id: string;
+  nome: string;
+  valor: number;
+  dono: string;
+  estado: string;
+  descricao_jogo: string;
+  disponivel: boolean;
+}

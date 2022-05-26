@@ -1,24 +1,21 @@
 import { Router } from "express";
-import alugarConsoleRouter from "./alugar.routes";
+import alugarRouter from "./alugar.routes";
 import consoleRouter from "./console.routes";
 import enderecoRouter from "./enderecos.routes";
 import jogoRouter from "./jogos.routes";
 import usuarioRouter from "./usuario.routes";
 import loginRouter from "./login.routes";
-import alugarJogoRouter from "./alugarJogo.routes";
-import finalizarPedidoRouter from "./finalizarPedido.routes";
-import devolverRouter from "./devolverPedido.routes";
+import devolverRouter from "./devolver.routes";
+import ensureAuth from "../middlewares/ensureAuth";
 
 const routes = Router();
 
-routes.use("/consoles", consoleRouter);
-routes.use("/jogos", jogoRouter);
+routes.use("/consoles", ensureAuth, consoleRouter);
+routes.use("/jogos", ensureAuth, jogoRouter);
 routes.use("/usuarios", usuarioRouter);
 routes.use("/enderecos", enderecoRouter);
-routes.use("/alugar/consoles", alugarConsoleRouter);
+routes.use("/alugar", ensureAuth, alugarRouter);
 routes.use("/login", loginRouter);
-routes.use("/alugar/jogos", alugarJogoRouter);
-routes.use("/finalizar/:id", finalizarPedidoRouter);
-routes.use("/devolver/:id", devolverRouter);
+routes.use("/devolver", ensureAuth, devolverRouter);
 
 export default routes;

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { Jogo } from "../models/Jogos";
-import AtualizarJogosService from "../services/Jogos/AtualizarJogo.service";
+import AtualizarJogoService from "../services/Jogos/AtualizarJogo.service";
 import BuscarJogoService from "../services/Jogos/BuscarJogo.service";
 import CriarJogosService from "../services/Jogos/CriarJogos.service";
 import DeletarJogoService from "../services/Jogos/DeletarJogo.service";
@@ -40,34 +40,31 @@ export default class JogosController {
 
     return response.status(200).json(jogo);
   }
-
   static async update(request: Request, response: Response) {
-    const { nome, valor, descricao_jogo, dono, estado, disponivel } =
-      request.body;
     const { id } = request.params;
+    const { nome, valor, dono, estado, descricao_jogo, disponivel } =
+      request.body;
 
-    const attJogo = new AtualizarJogosService();
-
-    const jogo = await attJogo.execute({
+    const jogo = await AtualizarJogoService.execute({
+      id,
       nome,
       valor,
-      descricao_jogo,
       dono,
       estado,
+      descricao_jogo,
       disponivel,
-      id,
     });
 
-    return response.status(200).json(jogo);
+    return response
+      .status(200)
+      .json({ message: "Jogo atualizado", jogoAtualizado: jogo });
   }
-
   static async delete(request: Request, response: Response) {
-    const { id } = request.params;
+    const { id } = request.body;
+    const deletarJogo = await DeletarJogoService.execute(id);
 
-    const apagarJogo = new DeletarJogoService();
-
-    await apagarJogo.execute(id);
-
-    return response.status(200).json({ message: "Game deleted" });
+    return response
+      .status(200)
+      .json({ message: "Jogo deletado", jogoDeletado: deletarJogo });
   }
 }

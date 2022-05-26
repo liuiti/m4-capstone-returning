@@ -1,41 +1,35 @@
-import { AppDataSource } from "../../data-source";
 import { Jogo } from "../../models/Jogos";
+import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
-import { IJogosUpdate } from "../../interfaces/Jogos";
+import { IJogoAtualizar } from "../../interfaces/Jogos";
 
-export default class AtualizarJogosService {
-    async execute({
+export default class AtualizarJogoService {
+  static async execute({
+    id,
     nome,
     valor,
-    id,
     descricao_jogo,
     dono,
     estado,
     disponivel,
-  }: IJogosUpdate) {
-    const jogosRepository = AppDataSource.getRepository(Jogo);
+  }: IJogoAtualizar): Promise<Jogo> {
+    const jogoRepositorio = AppDataSource.getRepository(Jogo);
 
-    const jogo = await jogosRepository.findOne({
-      where: {
-        id,
-      },
-    });
+    const jogo = await jogoRepositorio.findOne({ where: { id } });
 
     if (!jogo) {
-      throw new AppError("ID de jogo não encontrado", 400);
+      throw new AppError("Não encontrado nenhum jogo com esse id", 404);
     }
 
-    const jogoAtualizado = {
-      nome: nome || jogo?.nome,
-      valor: valor || jogo?.valor,
-      descricao_jogo: descricao_jogo || jogo?.descricao_jogo,
-      dono: dono || jogo?.dono,
-      estado: estado || jogo?.estado,
-      disponivel: disponivel || jogo?.disponivel,
-    };
+    nome ? (jogo.nome = nome) : jogo.nome;
+    valor ? (jogo.valor = valor) : jogo.valor;
+    dono ? (jogo.dono = dono) : jogo.dono;
+    estado ? (jogo.estado = estado) : jogo.estado;
+    descricao_jogo
+      ? (jogo.descricao_jogo = descricao_jogo)
+      : jogo.descricao_jogo;
+    disponivel ? (jogo.disponivel = disponivel) : jogo.disponivel;
 
-    jogosRepository.update(id, jogoAtualizado);
-
-    return jogoAtualizado;
+    return jogoRepositorio.save(jogo);
   }
 }

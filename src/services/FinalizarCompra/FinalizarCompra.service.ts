@@ -90,7 +90,6 @@ export default class FinalizarCompraService {
     });
 
     usuario.pendencia = true;
-    console.log(precoDoPedido);
     return { usuario, valor: precoDoPedido };
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
   }

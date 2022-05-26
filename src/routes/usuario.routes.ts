@@ -5,7 +5,7 @@ import usuarioInfoExiste from "../middlewares/usuarioInfoExiste.middlewares";
 
 const usuarioRouter = Router();
 
-usuarioRouter.post("", ensureAuth, UsuarioController.store);
+usuarioRouter.post("", UsuarioController.store);
 usuarioRouter.get("", ensureAuth, UsuarioController.index);
 usuarioRouter.patch(
   "/:id",

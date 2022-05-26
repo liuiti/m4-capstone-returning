@@ -24,7 +24,7 @@ export default class CriarEnderecosService {
       numero,
       bairro,
       complemento,
-      usuario: usuarioId,
+      usuarioId: usuarioId,
     });
 
     await enderecoRepositorio.save(enderecoUsuario);

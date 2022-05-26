@@ -22,7 +22,7 @@ export default function ensureAuth(
 
     const { sub } = decoded;
 
-    request.body = {
+    request.user = {
       id: sub as string,
     };
 

@@ -1,10 +1,9 @@
 import { AppDataSource } from "../../data-source";
 import AppError from "../../errors/AppError";
-import { DeleteResult } from "typeorm";
 import { Jogo } from "../../models/Jogos";
 
 export default class DeletarJogoService {
-  static async execute(id: string): Promise<DeleteResult> {
+  static async execute(id: string): Promise<Jogo> {
     const jogoRepositorio = AppDataSource.getRepository(Jogo);
 
     const jogo = await jogoRepositorio.findOne({ where: { id } });
@@ -13,6 +12,7 @@ export default class DeletarJogoService {
       throw new AppError("Não encontrado nenhum jogo com esse id", 404);
     }
 
-    return await jogoRepositorio.delete(id);
+    await jogoRepositorio.delete(id);
+    return jogo;
   }
 }

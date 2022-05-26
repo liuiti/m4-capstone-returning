@@ -32,7 +32,7 @@ export default class EnderecoController {
 
   static async update(request: Request, response: Response) {
     const { id } = request.params;
-    const { cidade, estado, cep, rua, numero, bairro, complemento } =
+    const { cidade, estado, cep, rua, numero, bairro, complemento, usuarioId } =
       request.body;
 
     const endereco = await AtualizarEnderecosService.execute({

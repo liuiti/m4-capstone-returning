@@ -10,7 +10,7 @@ export default class JogosController {
   static async store(request: Request, response: Response) {
     const { nome, valor, descricao_jogo, dono, estado, disponivel } =
       request.body;
-    console.log(request.body);
+
     const jogo = await CriarJogosService.execute({
       nome,
       valor,
@@ -56,7 +56,8 @@ export default class JogosController {
       .json({ message: "Jogo atualizado", jogoAtualizado: jogo });
   }
   static async delete(request: Request, response: Response) {
-    const { id } = request.body;
+    const { id } = request.params;
+
     const deletarJogo = await DeletarJogoService.execute(id);
 
     return response

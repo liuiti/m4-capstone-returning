@@ -2,16 +2,15 @@ import { DataSource } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import request from "supertest";
 import app from "../../app";
-import CriarUsuarioService from "../../services/usuario/criarUsuario.service";
 
-describe("Testing the user routes", () => {
+describe("Testando a rota de usuários", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
       .then((res) => (connection = res))
       .catch((err) => {
-        console.error("Error during Data Source initialization", err);
+        console.error("Erro durante a inicialização do Data Source", err);
       });
   });
 
@@ -19,7 +18,7 @@ describe("Testing the user routes", () => {
     await connection.destroy();
   });
 
-  test("Should be able to create a new user", async () => {
+  test("Deverá criar um novo usuário", async () => {
     const cpf = "123456";
     const email = "novoemail@email.com";
     const nome = "Nome atualizado";
@@ -32,23 +31,16 @@ describe("Testing the user routes", () => {
     const response = await request(app).post("/usuarios").send(usuarioInfo);
 
     expect(response.statusCode).toEqual(201);
-    /* expect(response.body).toEqual(
+    expect(response.body).toEqual(
       expect.objectContaining({
-        id: "id",
+        id: response.body.id,
         cpf,
         email,
         nome,
         pendencia,
-        senha,
+        senha: response.body.senha,
         telefone,
       })
-    ); */
+    );
   });
-
-  /* test("Should be able to return a list of all registered users", async () => {
-    const response = await request(app).get("/usuarios");
-
-    expect(response.status).toBe(200);
-    expect(response.body).toHaveProperty("map");
-  }); */
 });

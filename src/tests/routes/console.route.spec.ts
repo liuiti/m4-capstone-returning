@@ -41,23 +41,17 @@ describe("Deve ser capaz de criar um novo console", () => {
       }))
     
   });
+  test("Este teste deve ser capaz de listar os consoles",async()=>{
+      const response = await request(app).get("/consoles").send()
+  
+      expect(response.status).toBe(200);
+      expect(response.body).toHaveProperty("map")
+  });
+  
+
 });
 
-// test("Este teste deve ser capaz de listar os consoles",async()=>{
-//     const response = await request(app).get("/consoles").send()
-
-//     expect(response.status).toBe(200);
-//     expect(response.body).toHaveProperty("map")
-// });
-
-// test("Deve ser capaz de deletar um  console no database", async () => {
-   
-//   const response= await request(app).delete("/consoles/1").send()
-
-//   expect(response.status).toBe(200)
-//   expect(response.body).toEqual({messagem:"Console deletado"})
 
 
-// });
 
 

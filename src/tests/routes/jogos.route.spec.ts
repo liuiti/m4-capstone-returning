@@ -47,4 +47,10 @@ describe("Deve ser capaz de criar um novo console", () => {
       }))
     
   });
+  test("Este teste deve ser capaz de listar os jogos",async()=>{
+    const response = await request(app).get("/jogos").send()
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("map")
+});
 });

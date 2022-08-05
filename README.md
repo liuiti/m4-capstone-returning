@@ -2,6 +2,8 @@ passar o pendencias para true no usuario quando finalizar compras
 
 # m4-capstone-returning
 
+BASE_URL:https://m4-capstone-returning.herokuapp.com
+
 ---
 
 \*\*Rota de criação de usuário
